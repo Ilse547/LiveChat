@@ -1,0 +1,29 @@
+{
+  "name": "livechat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev": "webpack --watch",
+    "start": "node server/app.js",
+    "dev-server": "npm run build && npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "vue": "^3.5.29"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.5.29",
+    "css-loader": "^7.1.4",
+    "html-webpack-plugin": "^5.6.6",
+    "style-loader": "^4.0.0",
+    "vue-loader": "^17.4.2",
+    "webpack": "^5.105.2",
+    "webpack-cli": "^6.0.1"
+  },
+  "description": ""
+}
