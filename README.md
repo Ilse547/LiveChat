@@ -53,26 +53,26 @@ In the /backend folder run ```node app.js```
 
 # file structure:
 
-Livechat/
-├── README.md
-├── package.json
-├── package-lock.json
-├── webpack.config.js
-├── .gitignore
-├── src/
-│   ├── components/
-│   │   ├── Home.vue
-│   │   └── *.vue
-│   ├── pages/
-│   │   ├── home.js
-│   │   └── *.js files
-│   ├── styles/
-│   │   ├── style.css
-│   │   └── *.css files
-├── public/
-│   ├── index.html
-│   └── *.html
-├── dist/
-│   └── Build output
-├── server/
-│   └── app.js
+Livechat/  
+├── README.md  
+├── package.json  
+├── package-lock.json  
+├── webpack.config.js  
+├── .gitignore  
+├── src/  
+│   ├── components/  
+│   │   ├── Home.vue  
+│   │   └── *.vue  
+│   ├── pages/  
+│   │   ├── home.js  
+│   │   └── *.js files  
+│   ├── styles/  
+│   │   ├── style.css  
+│   │   └── *.css files  
+├── public/  
+│   ├── index.html  
+│   └── *.html  
+├── dist/  
+│   └── Build output  
+├── server/  
+│   └── app.js  
