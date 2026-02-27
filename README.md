@@ -11,6 +11,13 @@ Users should be able to:
 - Create/Delete Groups with other users
 - If they are an Admin Delete messages
 
+# How to run:
+After cloning:  
+To make sure everything is installed :``` npm install ```  
+To build the project: ``` npm run build ```  
+To run the project: ``` npm start ``` or ``` node /server/app.js ```
+
+
 ## Authentication & Credentials:
 ### Credential:
 Admin credentials:

@@ -1,19 +1,18 @@
 <template>
-  <div class="home-container">
-    <h1>Welcome to Live Chat</h1>
-    <div class="chat-preview">
-      <p>Join conversations with people around the world!</p>
-      <button @click="joinChat" class="join-btn">Join Chat</button>
-    </div>
+  <div class="HomeConatiner">
+    <h1>Live chat</h1>
+  <div class="ChatPrieview">
+    <p>Join conversations</p>
+    <button @click="JoinChat" class="JoinButton">Join Chats</button>
+  </div>
   </div>
 </template>
-
 <script>
 export default {
   name: 'Home',
   methods: {
-    joinChat() {
-      window.location.href = '/chat';
+    JoinChat() {
+      window.location.href = '/chat'
     }
   }
 }

@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
     home: './src/pages/home.js',
+    chat: './src/pages/chat.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -29,7 +30,13 @@ module.exports = {
       template: './public/index.html',
       filename: 'home.html',
       chunks: ['home']
-    })
+    }),
+    
+  new HtmlWebpackPlugin({
+    template: './public/index.html',
+    filename: 'chat.html',
+    chunks: ['chat']
+  })
   ],
   mode: 'development'
 };
