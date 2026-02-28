@@ -6,6 +6,9 @@
     </nav>
     <main>
         <h1>Chat Room</h1>
+        <div class="ChatDiv">
+          <p>Messages</p>
+        </div>
         <input aria-label="Message Input Box" class="MessageInput" type="text" placeholder="Write your message here">
         <button aria-label="Send Message Button" class="SendMessageButton">Send</button>
     </main>
