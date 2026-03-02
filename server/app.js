@@ -11,7 +11,10 @@ app.get('/home', (req, res) =>{
 });
 
 app.get('/', (req, res) => {
-  res.redirect('/home');
+  res.redirect('/login');
+});
+app.get('/login', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../dist/login.html'));
 });
 
 app.get('/test', (req, res) => {
