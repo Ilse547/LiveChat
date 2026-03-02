@@ -2,10 +2,10 @@
   <div>
 
     <nav class="Sidebar">
-        <h1>HELLO</h1>
+        <h1>Nav bar</h1>
     </nav>
     <main>
-        <h1>Chat Room</h1>
+        <h1>General Chat</h1>
         <div class="ChatDiv">
           <p>Messages</p>
         </div>
@@ -17,6 +17,9 @@
 
 <script>
 export default {
-  name: 'Chat'
+  name: 'Chat',
+    mounted() {
+    document.title = 'General Chat'
+  },
 }
 </script>
