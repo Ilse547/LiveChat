@@ -2,6 +2,7 @@
   <div>
     <main>
         <p> please Register</p>
+        <button>Hello</button>
         <button @click="chat">Register</button>
     </main>
   </div>

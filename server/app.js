@@ -26,7 +26,7 @@ app.get('/login', (req, res)=>{
   res.sendFile(path.join(__dirname, '../dist/login.html'));
 });
 app.get('/register', (req,res)=>{
-  res.sendFile(üath.join(__dirname, '../dist/register.html'));
+  res.sendFile(path.join(__dirname, '../dist/register.html'));
 });
 
 app.get('/test', (req, res) => {

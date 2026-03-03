@@ -1,4 +1,4 @@
 import { createApp } from 'vue';
-import Home from '../components/Login.vue';
-import '../styles/styleNotChat.css';
+import Login from '../components/Login.vue';
+import '../styles/style.css';
 createApp(Login).mount('#app');
