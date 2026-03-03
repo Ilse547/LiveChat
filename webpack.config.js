@@ -7,6 +7,8 @@ module.exports = {
     home: './src/pages/home.js',
     chat: './src/pages/chat.js',
     login: './src/pages/login.js',
+    register: './src/pages/register.html',
+    group: './src/pages/group.html'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -39,10 +41,22 @@ module.exports = {
     chunks: ['chat']
   }),
 
-    new HtmlWebpackPlugin({
+  new HtmlWebpackPlugin({
     template: './public/index.html',
     filename: 'login.html',
     chunks: ['login']
+  }),
+
+  new HtmlWebpackPlugin({
+    template: './public/index.html',
+    filename: 'register.html',
+    chunks: ['register']
+  }),
+
+  new HtmlWebpackPlugin({
+    template: './public/index.html',
+    filename: 'group.html',
+    chunks: ['group']
   })
   ],
   mode: 'development'
