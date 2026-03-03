@@ -3,7 +3,10 @@
   <div>
     <main>
         <p> please login</p>
+        <input type="text" placeholder="Input your username">
+        <input type="password" placeholder="Input your password">
         <button @click="login">Login</button>
+
     </main>
   </div>
 </template>
