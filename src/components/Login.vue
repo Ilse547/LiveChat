@@ -7,6 +7,8 @@
         <input type="password" placeholder="Input your password">
         <button @click="login">Login</button>
 
+        <button @click="RegisterPage">RegisterPage</button>
+
     </main>
   </div>
 </template>
@@ -18,6 +20,9 @@ export default {
     document.title = 'Login Page'
   },
   methods:{
+    RegisterPage(){
+      window.location.href="/register"
+    },
     login(){
         window.location.href="/chat"
     }

@@ -1,9 +1,14 @@
 <template>
   <div>
     <main>
+      <div class="Registration" >
+
         <p> please Register</p>
-        <button>Hello</button>
+        <input type="text" placeholder="Input your username">
+        <input type="password" placeholder="Input your password">
         <button @click="chat">Register</button>
+        <button @click="LoginPage">Login Page</button>
+      </div>
     </main>
   </div>
 </template>
@@ -17,6 +22,9 @@ export default {
   methods:{
     chat(){
         window.location.href="/chat"
+    },
+    LoginPage(){
+      window.location.href="/login"
     }
   }
 }
