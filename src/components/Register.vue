@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'Chat',
+  name: 'Register',
   mounted() {
     document.title = 'Registration'
   },
