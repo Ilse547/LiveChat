@@ -7,8 +7,8 @@ module.exports = {
     home: './src/pages/home.js',
     chat: './src/pages/chat.js',
     login: './src/pages/login.js',
-    register: './src/pages/register.html',
-    group: './src/pages/group.html'
+    register: './src/pages/register.js',
+    group: './src/pages/group.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
