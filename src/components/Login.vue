@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'Chat',
+  name: 'Login',
   mounted() {
     document.title = 'Login Page'
   },
