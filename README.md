@@ -34,9 +34,10 @@ The live communication will be handled by [GUNjs](https://gun.eco/)
 
 ### Backend:
 Express for the backend  
+Backend Routing and handling of the credentials, database conections
 
 ### Frontend:
-Vue3 as a fronend framework
+Vue3 as a frontend framework
 
 ### Database:
 MongoDB for stroign user data and group data
