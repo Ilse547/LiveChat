@@ -19,7 +19,7 @@
 export default {
   name: 'Group',
     mounted() {
-    document.title = 'Group Chat'
+    document.title = 'Group Chat Page'
   },
 }
 </script>
