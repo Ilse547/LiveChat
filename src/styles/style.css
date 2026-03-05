@@ -45,7 +45,7 @@ body{
 }
 .InputArea{
     display: flex;
-    paddig:1rem;
+    padding:1rem;
     border-top: 1px solid #ccc;
     background-color: white;
     gap:0.5rem;
