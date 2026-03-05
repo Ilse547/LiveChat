@@ -1,25 +1,27 @@
 <template>
-  <div>
-
+  <div class="ChatDiv">
     <nav class="Sidebar">
         <h1>Nav bar</h1>
     </nav>
-    <main>
-        <h1>General Chat</h1>
-        <div class="ChatDiv">
-          <p>Messages</p>
-        </div>
-        <input aria-label="Message Input Box" class="MessageInput" type="text" placeholder="Write your message here">
-        <button aria-label="Send Message Button" class="SendMessageButton">Send</button>
+    <main class="ChatMain">
+      <h1>General Chat</h1>
+      <div class="MessageDiv">
+        <p>Messages</p>
+        <p>Message2</p>
+        <p>Message3</p>
+      </div>
+      <div class="InputArea">
+        <input type="text" placeholder="Write your message here">
+        <button class="SendButton">Send</button>
+      </div>
     </main>
   </div>
 </template>
-
 <script>
-export default {
-  name: 'Chat',
-    mounted() {
-    document.title = 'General Chat'
-  },
-}
+  export default {
+    name: 'Chat',
+      mounted() {
+      document.title = 'General Chat'
+    },
+  }
 </script>
