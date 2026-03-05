@@ -1,5 +1,4 @@
-*{
-    box-sizing: border-box;
+*{  box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -50,11 +49,14 @@ body{
     background-color: white;
     gap:0.5rem;
     width:100%;
+    border-radius: 5px;
 }
 .MessageInput{
     flex:1;
     padding: 0.5rem;
+    border-radius: 5px;
 }
 .SendMessageButton{
     padding: 0.5rem 1rem;
+    border-radius: 5px;
 }
