@@ -11,8 +11,8 @@
         <p>Message3</p>
       </div>
       <div class="InputArea">
-        <input type="text" placeholder="Write your message here">
-        <button class="SendButton">Send</button>
+        <input type="text" class="TextInput" placeholder="Write your message here">
+        <button class="InputButton">Send</button>
       </div>
     </main>
   </div>
