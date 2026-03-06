@@ -3,11 +3,14 @@
   <div>
     <main>
         <p> please login</p>
-        <input class="TextInput" type="text" placeholder="Input your username">
-        <input class="TextInput" type="password" placeholder="Input your password">
-        <button class="InputButton" @click="login">Login</button>
+        <div class ="InputArea">
+          <input class="TextInput" type="text" placeholder="Input your username">
+          <input class="TextInput" type="password" placeholder="Input your password">
+          <button class="InputButton" @click="login">Login</button>
 
-        <button class="InputButton" @click="RegisterPage">RegisterPage</button>
+          <button class="InputButton" @click="RegisterPage">RegisterPage</button>
+        </div>
+
 
     </main>
   </div>

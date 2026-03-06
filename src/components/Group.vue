@@ -9,8 +9,11 @@
         <div class="ChatDiv">
           <p>Messages</p>
         </div>
-        <input aria-label="Message Input Box" class="TextInput" id="MessageInputField" type="text" placeholder="Write your message here">
-        <button aria-label="Send Message Button" class="InputButton" id="SendMessageButton">Send</button>
+        <div class="InputArea">
+          <input aria-label="Message Input Box" class="TextInput" id="MessageInputField" type="text" placeholder="Write your message here">
+          <button aria-label="Send Message Button" class="InputButton" id="SendMessageButton">Send</button>
+        </div>
+
     </main>
   </div>
 </template>
