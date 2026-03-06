@@ -5,11 +5,16 @@
 
 ## Description: 
 Fullstack Webapp for users to be able to have a real time communication using a websocket (GUNjs), a frontend and backend framework.  
-Users should be able to:  
-- Create/Delete and Login into an account
-- Reset the account password
-- Create/Delete Groups with other users
-- If they are an Admin Delete messages
+
+Users should be able to:   
+- Create/Delete and Login into an account  
+- Reset the account password  
+- Create/Delete Groups with other users  
+- Users should be able to Edit the group name  
+- If they are an Admin Delete messages  
+- Users should be able to edit their messages  
+
+
 
 # How to run:
 After cloning:  
