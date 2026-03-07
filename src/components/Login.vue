@@ -3,7 +3,7 @@
   <div>
     <main>
         <p> please login</p>
-        <div class ="InputArea">
+        <div class="LoginInputArea">
           <input class="TextInput" type="text" placeholder="Input your username">
           <input class="TextInput" type="password" placeholder="Input your password">
           <button class="InputButton" @click="login">Login</button>

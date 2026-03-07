@@ -4,10 +4,12 @@
       <div class="Registration" >
 
         <p> please Register</p>
-        <input type="text" placeholder="Input your username">
-        <input type="password" placeholder="Input your password">
-        <button @click="chat">Register</button>
-        <button @click="LoginPage">Login Page</button>
+        <div class="RegisterInputArea">   
+          <input class="TextInput" type="text" placeholder="Input your username">
+          <input class="TextInput" type="password" placeholder="Input your password">
+          <button class="InputButton" @click="chat">Register</button>
+          <button class="InputButton" @click="LoginPage">Login Page</button>
+        </div>
       </div>
     </main>
   </div>
