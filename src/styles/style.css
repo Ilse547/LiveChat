@@ -57,11 +57,10 @@ body{
     align-items: center;
     justify-content: center;
     padding:1rem;
-    border-top: 1px solid #ccc;
-    background-color: white;
+
+    background-color: #f2e1f8;
     gap:0.5rem;
     width:300px;
-    border-radius: 5px;
     margin: 0 auto;
 }
 .TextInput{
@@ -73,4 +72,5 @@ body{
 .InputButton{
     padding: 0.5rem 1rem;
     border-radius: 5px;
+    width: 150px;
 }

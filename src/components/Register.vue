@@ -3,8 +3,10 @@
     <main>
       <div class="Registration" >
 
-        <p> please Register</p>
+        
         <div class="RegisterInputArea">   
+          <p> please Register</p>
+
           <input class="TextInput" type="text" placeholder="Input your username">
           <input class="TextInput" type="password" placeholder="Input your password">
 
