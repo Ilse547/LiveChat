@@ -7,8 +7,9 @@
         <div class="RegisterInputArea">   
           <input class="TextInput" type="text" placeholder="Input your username">
           <input class="TextInput" type="password" placeholder="Input your password">
-          <button class="InputButton" @click="chat">Register</button>
-          <button class="InputButton" @click="LoginPage">Login Page</button>
+
+          <button class="InputButton"style="background-color: rgb(177, 255, 177);" @click="chat">Register</button>
+          <button class="InputButton" id="LoginPageRedirect" style="background-color: rgb(255, 143, 143);"@click="LoginPage">Login Page</button>
         </div>
       </div>
     </main>

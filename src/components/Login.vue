@@ -6,9 +6,9 @@
         <div class="LoginInputArea">
           <input class="TextInput" type="text" placeholder="Input your username">
           <input class="TextInput" type="password" placeholder="Input your password">
-          <button class="InputButton" @click="login">Login</button>
+          <button class="InputButton" @click="login"style="background-color: rgb(177, 255, 177);">Login</button>
 
-          <button class="InputButton" @click="RegisterPage">RegisterPage</button>
+          <button class="InputButton" @click="RegisterPage" style="background-color: rgb(255, 143, 143);">RegisterPage</button>
         </div>
 
 
