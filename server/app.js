@@ -1,10 +1,15 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const {logger} = require('./middleware/logger');
 
 const PORT = 3000;
 
+
+app.use(logger);
 app.use(express.static(path.join(__dirname, '../dist')));
+
+
 
 app.get('/', (req, res) => {
   res.redirect('/login');
