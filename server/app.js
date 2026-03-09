@@ -4,7 +4,6 @@ const {logger} = require('./middleware/logger');
 const Usermodel = require('./models/user');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-dad
 
 const app = express();
 
@@ -15,15 +14,20 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to mongodb db'))
   .catch((err) => console.log('Couldnt connect to mongodb db', err));
 
+
+app.use(express.json());
+app.use(express.urlencoded({ extended : true }));
 app.use(logger);
 app.use(express.static(path.join(__dirname, '../dist')));
 
-
+ 
+  
 app.post('/login',async (req, res) =>{
+  const {Username, Password} = req.body;  
   try {
       const NewUser = new Usermodel({
-      username: 'test',
-      password: 'test'
+      username: Username,
+      password: Password
   });
     await NewUser.save();
     console.log("User created and saved to db");

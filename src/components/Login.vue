@@ -1,36 +1,57 @@
-<template>
-    <title>Login Page</title>
-  <div>
-    <main>
-        
-        <div class="LoginInputArea">
-          <p> please login</p>
+  <template>
+      <title>Login Page</title>
+    <div>
+      <main>
+          
+          <div class="LoginInputArea">
+            <p> please login</p>
 
-          <input class="TextInput" type="text" placeholder="Input your username">
-          <input class="TextInput" type="password" placeholder="Input your password">
-          <button class="InputButton" @click="login"style="background-color: rgb(177, 255, 177);">Login</button>
+            <input id="UsernameInput" class="TextInput" type="text" placeholder="Input your username">
+            <input id="PasswordInput" class="TextInput" type="password" placeholder="Input your password">
+            <button class="InputButton" @click="login"style="background-color: rgb(177, 255, 177);">Login</button>
 
-          <button class="InputButton" @click="RegisterPage" style="background-color: rgb(255, 143, 143);">RegisterPage</button>
-        </div>
+            <button class="InputButton" @click="RegisterPage" style="background-color: rgb(255, 143, 143);">RegisterPage</button>
+          </div>
 
 
-    </main>
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'Login',
-  mounted() {
-    document.title = 'Login Page'
-  },
-  methods:{
-    RegisterPage(){
-      window.location.href="/register"
+      </main>
+    </div>
+  </template>
+    
+  <script>
+  export default {
+    name: 'Login',
+    mounted() {
+      document.title = 'Login Page'
     },
-    login(){
-        window.location.href="/login"
+    methods:{
+      RegisterPage(){
+        window.location.href="/register"
+      },
+      async login(){
+        try {
+          const Username = document.getElementById('UsernameInput').value;
+          const Password = document.getElementById('PasswordInput').value;
+          const response = await  fetch('/login',{
+            method: 'POST',
+
+            headers:{'Content-Type':'application/json'},
+
+            body: JSON.stringify({
+              Username,
+              Password
+            })
+          });
+
+          if(response.ok) {
+            console.log('Login succeful, writing to db also ');
+            window.location.href = '/home';
+          }
+
+        }catch(err){
+          console.log('Error during login', err);
+        }
+      }
     }
   }
-}
-</script>
+  </script>
