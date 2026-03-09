@@ -1,9 +1,14 @@
 const express = require('express');
 const path = require('path');
-const app = express();
 const {logger} = require('./middleware/logger');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
-const PORT = 3000;
+const app = express();
+
+dotenv.config();
+const PORT = process.env.PORT
+
 
 
 app.use(logger);
