@@ -9,7 +9,9 @@ const app = express();
 dotenv.config();
 const PORT = process.env.PORT
 
-
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('Connected to mongodb db'))
+  .catch((err) => console.log('Couldnt connect to mongodb db', err));
 
 app.use(logger);
 app.use(express.static(path.join(__dirname, '../dist')));
