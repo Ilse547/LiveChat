@@ -29,7 +29,7 @@ export default {
       window.location.href="/register"
     },
     login(){
-        window.location.href="/chat"
+        window.location.href="/login"
     }
   }
 }

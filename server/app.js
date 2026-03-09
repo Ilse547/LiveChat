@@ -1,8 +1,10 @@
 const express = require('express');
 const path = require('path');
 const {logger} = require('./middleware/logger');
+const Usermodel = require('./models/user');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+
 
 const app = express();
 
@@ -15,6 +17,22 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use(logger);
 app.use(express.static(path.join(__dirname, '../dist')));
+
+
+app.post('/login',async (req, res) =>{
+  try {
+      const NewUser = new Usermodel({
+      username: 'test',
+      password: 'test'
+  });
+    await NewUser.save();
+    console.log("User created and saved to db");
+    res.redirect('/home');
+  }catch(err){console.log("Error creating user", err)
+      res.status(400).json({error: "Error creating user"});
+  };
+
+});
 
 
 
