@@ -79,3 +79,15 @@ body{
     border-radius: 5px;
     width: 150px;
 }
+#RegisterPageRedirect, #LoginPageRedirect {
+    background-color: #b1ffb1;
+}
+.InputButton:hover{
+    background-color: #B1FFD8 !important;
+}
+a{
+    color: black;
+}
+a:hover {
+    color: red;
+}
