@@ -60,7 +60,7 @@ app.post('/register', async (req, res) => {
 
 
 app.get('/', (req, res) => {
-  res.redirect('/login');
+  res.redirect('/home');
 });
 
 app.get('/home', (req, res) =>{
