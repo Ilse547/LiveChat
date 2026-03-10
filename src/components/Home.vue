@@ -1,12 +1,12 @@
 <template>
-  <div class="HomeConatiner">
+  <div class="Description">
+    <h1> Welcome to the Live chat application </h1>
 
-    <h1>Welcome to the Live chat application</h1>
-    <div class="ChatPrieview">
-      <p>Join conversations by:</p>
-      <button @click="LoginPage" class="InputButton">Loging in</button>
-      <button @click="RegisterPage" class="InputButton">Registering</button>
-    </div>
+    <p>Join conversations by:</p>
+
+    <button @click="LoginPage" class="InputButton">Loging in</button>
+    <button @click="RegisterPage" class="InputButton">Registering</button>
+
     <h1>About The application</h1>
       <p>
         This is an Open Source Live Chat webapp using:
