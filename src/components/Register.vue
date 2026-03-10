@@ -10,8 +10,8 @@
           <input id="UsernameInput" class="TextInput" type="text" placeholder="Input your username">
           <input id="PasswordInput" class="TextInput" type="password" placeholder="Input your password">
 
-          <button class="InputButton"style="background-color: rgb(177, 255, 177);" @click="Register">Register</button>
-          <button class="InputButton" id="LoginPageRedirect" style="background-color: rgb(255, 143, 143);"@click="LoginPage">Login Page</button>
+          <button class="InputButton" @click="Register">Register</button>
+          <button class="InputButton" id="LoginPageRedirect" @click="LoginPage">Login Page</button>
         </div>
       </div>
     </main>

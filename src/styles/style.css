@@ -78,6 +78,7 @@ body{
     padding: 0.5rem 1rem;
     border-radius: 5px;
     width: 150px;
+    background-color: #b1ffb1;
 }
 #RegisterPageRedirect, #LoginPageRedirect {
     background-color: #b1ffb1;
