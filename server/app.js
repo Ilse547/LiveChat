@@ -39,6 +39,25 @@ app.post('/login',async (req, res) =>{
 });
 
 
+app.post('/register', async (req, res) => {
+
+  const {Username, Password} = req.body;
+  try {
+    const NewUser = new Usermodel ({
+      username : Username,
+      password : Password
+    });
+    await NewUser.save();
+    console.log('User was saved to db');
+    res.status(200).json({message : 'Woked'})
+  }catch(err){
+    console.log('error while saving suer to db'), err
+    res.status(400).json({error: "error creating user"});
+  }
+})
+
+
+
 
 app.get('/', (req, res) => {
   res.redirect('/login');
