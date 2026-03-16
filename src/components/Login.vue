@@ -52,10 +52,14 @@
           if(response.ok) { 
             console.log('Login succeful, writing to db also ');
             window.location.href = '/chat';
+          } else {
+            const err = await response.json();
+            alert(err.message || 'Login faiels')
           }
 
         }catch(err){
           console.log('Error during login', err);
+          alert(err.message || 'Login Failed')
         }
       }
     }
