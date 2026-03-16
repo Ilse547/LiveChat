@@ -10,7 +10,7 @@
             <input id="PasswordInput" class="TextInput" type="password" placeholder="Input your password">
             <button class="InputButton" @click="login">Login</button>
 
-            <button class="InputButton" @click="RegisterPage">RegisterPage</button>
+            <button class="InputButton" @click="RegisterPage" >RegisterPage</button>
           </div>
 
 
@@ -21,6 +21,12 @@
   <script>
   export default {
     name: 'Login',
+    data () {
+      return {
+        Username: '',
+        Password: ''
+      }
+    },
     mounted() {
       document.title = 'Login Page'
     },
@@ -43,9 +49,9 @@
             })
           });
 
-          if(response.ok) {
+          if(response.ok) { 
             console.log('Login succeful, writing to db also ');
-            window.location.href = '/home';
+            window.location.href = '/chat';
           }
 
         }catch(err){

@@ -21,24 +21,30 @@ app.use(logger);
 app.use(express.static(path.join(__dirname, '../dist')));
 
  
-  
+//LOGIN LOGIC
+
 app.post('/login',async (req, res) =>{
-  const {Username, Password} = req.body;  
-  try {
-      const NewUser = new Usermodel({
-      username: Username,
-      password: Password
-  });
-    await NewUser.save();
-    console.log("User created and saved to db");
-    res.redirect('/home');
-  }catch(err){console.log("Error creating user", err)
-      res.status(400).json({error: "Error creating user"});
-  };
+  try{
+    const {Username, Password} = req.body;
+    const User = await Usermodel.findOne({username: Username});  
+
+    if(!User) return res.status(401).json({message : 'no user fund with this naea'});
+
+    const IsValidPassword = await User.password === Password;
+    if(!IsValidPassword) return res.status(401).json({message : 'pssword doesnt match the user'});
+
+    res.status(200).json({message : 'Login successful'});
+
+  } catch(err){
+    console.error('Problem during login', err);
+    res.status(500).json({message : 'Problem durng the loging in process'})
+  }
 
 });
 
 
+
+//REGISTER LOGIC
 app.post('/register', async (req, res) => {
 
   const {Username, Password} = req.body;
