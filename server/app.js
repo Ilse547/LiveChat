@@ -4,11 +4,16 @@ const {logger} = require('./middleware/logger');
 const Usermodel = require('./models/user');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken');
 
-const app = express();
 
 dotenv.config();
-const PORT = process.env.PORT
+
+
+const app = express();
+const PORT = process.env.PORT;
+const JWT_KEY = process.env.JWT_KEY;
+
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to mongodb db'))
@@ -30,7 +35,7 @@ app.post('/login',async (req, res) =>{
 
     if(!User) return res.status(401).json({message : 'no user fund with this naea'});
 
-    const IsValidPassword = await User.password === Password;
+    const IsValidPassword = await User.ComparePassword(Password);
     if(!IsValidPassword) return res.status(401).json({message : 'pssword doesnt match the user'});
 
     res.status(200).json({message : 'Login successful'});
