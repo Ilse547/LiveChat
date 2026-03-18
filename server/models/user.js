@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+
 const userSchema = new mongoose.Schema
 ({
   username: {
@@ -12,7 +14,16 @@ const userSchema = new mongoose.Schema
     type: String,
     required:true,
     minlength:8,
-    maxlength:16
   }
 });
+
+userSchema.pre('save', async function() {
+  if(!this.isModified('password')) return;
+    this.password = await bcrypt.hash(this.password, 12);
+});
+
+userSchema.methods.ComparePassword = async function (TestPassword) {
+  return await bcrypt.compare(TestPassword, this.password);
+}
+
 module.exports = mongoose.model('Usermodel', userSchema);

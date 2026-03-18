@@ -49,6 +49,10 @@ app.post('/register', async (req, res) => {
 
   const {Username, Password} = req.body;
   try {
+
+    const ExistingUsername = await Usermodel.findOne({username : Username});
+    if(ExistingUsername) {return res.status(400).json({message : 'This Username is already taken'});}
+
     const NewUser = new Usermodel ({
       username : Username,
       password : Password
@@ -57,7 +61,7 @@ app.post('/register', async (req, res) => {
     console.log('User was saved to db');
     res.status(200).json({message : 'Woked'})
   }catch(err){
-    console.log('error while saving suer to db'), err
+    console.log('error while saving suer to db', err)
     res.status(400).json({error: "error creating user"});
   }
 })
