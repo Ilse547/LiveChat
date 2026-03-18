@@ -44,7 +44,7 @@ app.post('/login',async (req, res) =>{
       admin: User.admin
     };
 
-    const tokem = jwt.sign(Payload, JWT_KEY, {expiresIn: '12h'});
+    const token = jwt.sign(Payload, JWT_KEY, {expiresIn: '12h'});
     console.log(`The user: ${User.username} logged in`);
     res.status(200).json({message : 'Login successful', token});
 
