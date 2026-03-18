@@ -19,6 +19,11 @@
         The source code for this project can be found on 
         <a href="https://github.com/Ilse547/LiveChat">github</a>
       </p>
+      <h2>Some Credentials:</h2>
+      <p>
+        Username: <code>test</code> <br>
+        Password: <code>testtest</code> <br>
+      </p>
   </div>
 </template>
 <script>
