@@ -38,7 +38,15 @@ app.post('/login',async (req, res) =>{
     const IsValidPassword = await User.ComparePassword(Password);
     if(!IsValidPassword) return res.status(401).json({message : 'pssword doesnt match the user'});
 
-    res.status(200).json({message : 'Login successful'});
+    const Payload = {
+      username : Usermodel.username,
+      id : User._id,
+      admin: User.admin
+    };
+
+    const tokem = jwt.sign(Payload, JWT_KEY, {expiresIn: '12h'});
+    console.log(`The user: ${User.username} logged in`);
+    res.status(200).json({message : 'Login successful', token});
 
   } catch(err){
     console.error('Problem during login', err);
