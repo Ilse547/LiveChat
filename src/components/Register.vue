@@ -47,7 +47,7 @@ export default {
         });
         if(response.ok) {
           console.log('REGISTRATION SUCCESSFUL, WROTE TO DB');
-          window.location.href = '/chat'
+          window.location.href = '/login'
         } else {
           const err = await response.json();
           alert(err.message || 'Registration Failed');
