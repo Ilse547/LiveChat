@@ -31,7 +31,7 @@
           const response = await fetch('/verify', {
             method : 'GET',
             headers : {
-              'Autorization' : `Bearer ${token}`
+              'Authorization' : `Bearer ${token}`
             }
           });
           if(!response.ok) {

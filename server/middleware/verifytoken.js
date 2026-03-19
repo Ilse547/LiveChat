@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken');
 
 const VerifyToken = (req, res, next) => {
     const BearerHeader = req.headers['authorization'];
-    if(typeof bearerHeader !== 'undefined') {
-        const token = bearerHeader.split(' ')[1];
+    if(typeof BearerHeader !== 'undefined') {
+        const token = BearerHeader.split(' ')[1];
         jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
             if(err) {
                 return res.status(403).json({ message : 'Invalid token'});
