@@ -1,4 +1,4 @@
-  <template>
+    <template>
       <title>Login Page</title>
     <div>
       <main>
@@ -50,7 +50,10 @@
           });
 
           if(response.ok) { 
+            const data = await response.json();
             console.log('Login succeful, writing to db also ');
+            localStorage.setItem('token', data.token);
+
             window.location.href = '/chat';
           } else {
             const err = await response.json();

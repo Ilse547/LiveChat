@@ -5,7 +5,7 @@ const Usermodel = require('./models/user');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
-
+const { VerifyToken } = require('./middleware/verifytoken');
 
 dotenv.config();
 
@@ -45,6 +45,8 @@ app.post('/login',async (req, res) =>{
     };
 
     const token = jwt.sign(Payload, JWT_KEY, {expiresIn: '12h'});
+
+
     console.log(`The user: ${User.username} logged in`);
     res.status(200).json({message : 'Login successful', token});
 
@@ -79,6 +81,10 @@ app.post('/register', async (req, res) => {
   }
 })
 
+app.get('/verify', VerifyToken, (req, res) => {
+  res.status(200).json({ message : 'Token is valid', user: req.user });
+})
+
 
 
 
@@ -94,7 +100,7 @@ app.get('/chat', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/chat.html'));
 });
 
-app.get('/group', (req,res)=>{
+app.get('/group', VerifyToken, (req,res)=>{
   res.sendFile(path.join(__dirname, '../dist/group.html'));
 });
 

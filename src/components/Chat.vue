@@ -20,8 +20,28 @@
 <script>
   export default {
     name: 'Chat',
-      mounted() {
-      document.title = 'General Chat'
+      async mounted() {
+        document.title = 'General Chat'
+        const token = localStorage.getItem('token');
+        if(!token) {
+          window.location.href = '/login'
+        }
+        
+        try {
+          const response = await fetch('/verify', {
+            method : 'GET',
+            headers : {
+              'Autorization' : `Bearer ${token}`
+            }
+          });
+          if(!response.ok) {
+            localStorage.removeItem('token');
+            window.location.href = ('/login');
+          }
+        } catch(err) {
+          console.error('token verification failed', err);
+          window.location.href = '/login';
+        }
     },
   }
 </script>
