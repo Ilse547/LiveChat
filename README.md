@@ -33,13 +33,13 @@ In the .env file you should have:
 
 ## Authentication & Credentials:
 ### Credential:
-Admin credentials:  
-password:  Admin
-username:  Admin123
+Admin credentials:    
+password:  Admin  
+username:  Admin123	
 
-User credential:  
-Password:  testtest
-username:  test
+User credential:   
+Password:  testtest  
+username:  test  
 
 ## Toolkit
 ### Live Communication:
