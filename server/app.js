@@ -39,7 +39,7 @@ app.post('/login',async (req, res) =>{
     if(!IsValidPassword) return res.status(401).json({message : 'pssword doesnt match the user'});
 
     const Payload = {
-      username : Usermodel.username,
+      username : User.username,
       id : User._id,
       admin: User.admin
     };

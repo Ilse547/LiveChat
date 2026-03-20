@@ -1,8 +1,15 @@
 <template>
   <div class="ChatDiv">
+
+
     <nav class="Sidebar">
-        <h1>Nav bar</h1>
+        <p> Logged in as:</p>
+        <h3> {{ username }} </h3>
+        <hr class="NavigationBarDivider" >
+        <h1>Groups:</h1>
     </nav>
+
+
     <main class="ChatMain">
       <h1>General Chat</h1>
       <div class="MessageDiv">
@@ -17,9 +24,13 @@
     </main>
   </div>
 </template>
+
 <script>
   export default {
     name: 'Chat',
+    data(){
+      return { username : '' }
+    },
       async mounted() {
         document.title = 'General Chat'
         const token = localStorage.getItem('token');
@@ -36,7 +47,10 @@
           });
           if(!response.ok) {
             localStorage.removeItem('token');
-            window.location.href = ('/login');
+            window.location.href = '/login';
+          } else {
+            const data = await response.json();
+            this.username = data.user.username;
           }
         } catch(err) {
           console.error('token verification failed', err);
