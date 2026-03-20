@@ -23,6 +23,14 @@ To build the project: ``` npm run build ```
 To run the project: ``` npm start ``` or ``` node /server/app.js ```
 
 
+# Environmental variables:
+In the .env file you should have:  
+- ``` PORT = ...``` -> The Port the server is running on  
+- ``` MONGO_URI = ...``` -> The URI to connect the server to the mongodb database
+- ``` JWT_KEY = ...``` -> The JsonWebToken key to create a token  
+
+
+
 ## Authentication & Credentials:
 ### Credential:
 Admin credentials:
@@ -49,7 +57,7 @@ MongoDB for stroign user data and group data
 GUNjs for the messages
 
 ### Authentication:
-
+This project uses JWT to ...
 
 ## Convention and choices made:
 Variables:```PascalCase```
