@@ -6,13 +6,25 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
 const { VerifyToken } = require('./middleware/verifytoken');
+const Gun = require('gun');
+const http = require('http');
 
 dotenv.config();
 
 
 const app = express();
+const server = http.createServer(app);
 const PORT = process.env.PORT;
 const JWT_KEY = process.env.JWT_KEY;
+
+const gun = Gun({
+  web : server,
+  peers : [
+    'https://livechat-qx1k.onrender.com',
+    'https://gun-manhattan.herokuapp.com/gun'
+  ]
+});
+
 
 
 mongoose.connect(process.env.MONGO_URI)
@@ -118,6 +130,6 @@ app.get('/test', (req, res) => {
 
 
 
-app.listen(PORT, () =>{
+server.listen(PORT, () =>{
   console.log(`server running on http://localhost:${PORT}`);
 });
