@@ -94,6 +94,7 @@ app.post('/register', async (req, res) => {
 })
 
 app.get('/verify', VerifyToken, (req, res) => {
+  console.log('req.user:', req.user); 
   res.status(200).json({ message : 'Token is valid', user: req.user });
 })
 

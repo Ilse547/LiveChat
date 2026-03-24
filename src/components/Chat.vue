@@ -12,24 +12,32 @@
 
     <main class="ChatMain">
       <h1>General Chat</h1>
+
       <div class="MessageDiv">
-        <p>Messages</p>
-        <p>Message2</p>
-        <p>Message3</p>
+        <p v-for="message in messages" :key="message.id">
+          <strong>{{ message.username }}</strong>: {{ message.text }}
+        </p>
       </div>
+
       <div class="InputArea">
-        <input type="text" class="TextInput" placeholder="Write your message here">
-        <button class="InputButton">Send</button>
+        <input v-model="NewMessage" @keyup.enter="SendMessage" type="text" class="TextInput" placeholder="Write your message here">
+        <button @click="SendMessage" class="InputButton">Send</button>
       </div>
     </main>
   </div>
 </template>
 
 <script>
+  import Gun from 'gun';
   export default {
     name: 'Chat',
     data(){
-      return { username : '' }
+      return {
+        username : '',
+        NewMessage : '',
+        messages : [],
+        gun : null
+      }
     },
       async mounted() {
         document.title = 'General Chat'
@@ -49,6 +57,21 @@
             localStorage.removeItem('token');
             window.location.href = '/login';
           } else {
+            this.gun = Gun({
+              peers : [
+                'https://livechat-qx1k.onrender.com',
+                'https://gun-manhattan.herokuapp.com/gun',
+                'http://localhost:3000/gun'
+              ]
+            })
+
+            this.gun.get('chat').map().on((message) => {
+              if(message && message.text) {
+                const exists = this.messages.find(m => m.id === message.id);
+                if(!exists){ this.messages.push(message); }
+              }
+            });
+
             const data = await response.json();
             this.username = data.user.username;
           }
@@ -57,5 +80,18 @@
           window.location.href = '/login';
         }
     },
+    methods: {
+      SendMessage() {
+        if(!this.NewMessage.trim()) return;
+        const message = {
+          id : Date.now().toString(),
+          username : this.username,
+          text : this.NewMessage,
+          timestamp : new Date().toISOString()
+        };
+        this.gun.get('chat').get(message.id).put(message);
+        this.NewMessage = '';
+      }
+    }
   }
 </script>
