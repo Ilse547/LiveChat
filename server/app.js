@@ -20,8 +20,7 @@ const JWT_KEY = process.env.JWT_KEY;
 const gun = Gun({
   web : server,
   peers : [
-    'https://livechat-qx1k.onrender.com',
-    'https://gun-manhattan.herokuapp.com/gun'
+    'https://livechat-qx1k.onrender.com/gun',
   ]
 });
 
