@@ -61,7 +61,7 @@
               peers : [
                 'https://livechat-qx1k.onrender.com',
                 'https://gun-manhattan.herokuapp.com/gun',
-                'http://localhost:3000/gun'
+                //'http://localhost:3000/gun'
               ]
             })
 
