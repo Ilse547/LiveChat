@@ -104,6 +104,10 @@ app.get('/', (req, res) => {
   res.redirect('/home');
 });
 
+app.get('/user/:username', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/profiles.html'));
+})
+
 app.get('/home', (req, res) =>{
   res.sendFile(path.join(__dirname, '../dist/home.html'));
 });
