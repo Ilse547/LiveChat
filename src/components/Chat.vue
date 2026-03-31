@@ -4,7 +4,7 @@
 
     <nav class="Sidebar">
         <p> Logged in as:</p>
-        <h3> {{ username }} </h3>
+        <h3 @click='GoToProfile' style='cursor: pointer'> {{ username }} </h3>
         <hr class="NavigationBarDivider" >
         <h1>Groups:</h1>
     </nav>
@@ -79,6 +79,9 @@
         }
     },
     methods: {
+      GoToProfile() {
+      window.location.href = `/user/${this.username}`;
+      },
       SendMessage() {
         if(!this.NewMessage.trim()) return;
         const message = {
