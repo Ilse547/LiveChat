@@ -8,12 +8,14 @@ module.exports = {
     chat: './src/pages/chat.js',
     login: './src/pages/login.js',
     register: './src/pages/register.js',
-    group: './src/pages/group.js'
+    group: './src/pages/group.js',
+    profiles: `./src/pages/profiles.js`
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js',
-    clean: true
+    clean: true,
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -61,6 +63,12 @@ module.exports = {
     template: './public/index.html',
     filename: 'group.html',
     chunks: ['group']
+  }),
+
+  new HtmlWebpackPlugin({
+    template: './public/index.html',
+    filename: 'profiles.html',
+    chunks: ['profiles']
   })
   ],
   mode: 'development'
