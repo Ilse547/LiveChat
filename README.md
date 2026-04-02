@@ -106,10 +106,10 @@ Livechat/
 │   ├── app.js  
 │   ├── middleware  
 │   │   ├── logger.js  
-│   │   └── *.js files  
-│   ├── models 
+│   │   └── *.js files    
+│   ├── models  
 │   │   ├── user.js  
 │   │   └── *.js files  
-│   ├──tests
-│   │   ├── login.test.js    
-│   │   └── *.test.js files
+│   ├──tests  
+│   │   ├── login.test.js  
+│   │   └── *.test.js files  
