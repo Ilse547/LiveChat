@@ -83,6 +83,7 @@ Livechat/
 ├── package-lock.json  
 ├── webpack.config.js  
 ├── .gitignore  
+├── .env  
 ├── src/  
 │   ├── components/  
 │   │   ├── Home.vue  
@@ -93,10 +94,22 @@ Livechat/
 │   ├── styles/  
 │   │   ├── style.css  
 │   │   └── *.css files  
+│   ├── styles/  
+│   │   ├── icon.png  
+│   │   └── *.png files   
 ├── public/  
 │   ├── index.html  
 │   └── *.html  
 ├── dist/  
 │   └── Build output  
 ├── server/  
-│   └── app.js  
+│   ├── app.js  
+│   ├── middleware  
+│   │   ├── logger.js  
+│   │   └── *.js files  
+│   ├── models 
+│   │   ├── user.js  
+│   │   └── *.js files  
+│   ├──tests
+│   │   ├── login.test.js    
+│   │   └── *.test.js files
