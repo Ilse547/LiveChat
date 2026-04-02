@@ -1,11 +1,11 @@
-ćonst request = require('supertest');
+const request = require('supertest');
 jest.mock('../models/user', () => {
   const MockSave = jest.fn().mockResolvedValue(true);
   const MockUserModel = jest.fn().mockImplementation(() => ({
-    save::MockSave,
+    save: MockSave,
   }));
   MockUserModel.findOne = jest.fn();
-  reutrn MockUserModel;
+  return MockUserModel;
 });
 
 jest.mock('mongoose', () => ({
@@ -22,13 +22,13 @@ describe('POST /register', () => {
       .post('/register')
       .send({Username : 'www', Password : 'Password123' });
     expect(res.status).toBe(400);
-    expect(res.body.message)toBe('Username already taken');
+    expect(res.body.message).toBe('Username already taken');
   });
   it('return 200 when registering a new user', async() => {
     UserModel.findOne.mockResolvedValue(null);
     const res = await request(app)
       .post('/regitser')
       .send({Username : 'xxx', Password : 'Password123'});
-    expect(res.status)toBe(200);
+    expect(res.status).toBe(200);
   });
 });
