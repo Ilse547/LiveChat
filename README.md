@@ -20,7 +20,8 @@ Users should be able to:
 After cloning:  
 To make sure everything is installed :``` npm install ```  
 To build the project: ``` npm run build ```  
-To run the project: ``` npm start ``` or ``` node /server/app.js ```
+To run the project: ``` npm start ``` or ``` node /server/app.js ```  
+To run the tests: `````npm test ```
 
 
 # Environmental variables:
@@ -66,6 +67,8 @@ Function: ```PascalCase```
 All Functions in their seperate file, imported in the app.js file.  
 Automatic tests:   
 
+### Testing:
+The project uses the jest and supertest libraries to run tests  
 
 
 ## How to run the project:
