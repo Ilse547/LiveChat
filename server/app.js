@@ -137,3 +137,4 @@ app.get('/test', (req, res) => {
 server.listen(PORT, () =>{
   console.log(`server running on http://localhost:${PORT}`);
 });
+module.exports = app;
