@@ -22,12 +22,12 @@ describe('POST /register', () => {
       .post('/register')
       .send({Username : 'www', Password : 'Password123' });
     expect(res.status).toBe(400);
-    expect(res.body.message).toBe('Username already taken');
+    expect(res.body.message).toBe('This Username is already taken');
   });
   it('return 200 when registering a new user', async() => {
     UserModel.findOne.mockResolvedValue(null);
     const res = await request(app)
-      .post('/regitser')
+      .post('/register')
       .send({Username : 'xxx', Password : 'Password123'});
     expect(res.status).toBe(200);
   });
