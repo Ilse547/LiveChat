@@ -39,6 +39,7 @@ code {
     height:100vh;
     overflow: hidden;
     padding:1rem;
+    width: calc(100vw - 150px);
 }
 .input-container{
     display:flex;
@@ -57,6 +58,7 @@ code {
     gap:0.5rem;
     width:100%;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 .LoginInputArea, .RegisterInputArea, .Description{
     display: flex;
@@ -76,6 +78,7 @@ code {
     padding: 0.5rem;
     border-radius: 5px;
     box-shadow: 1px 1px 5px;
+    min-width: 0;
 }
 .InputButton{
     padding: 0.5rem 1rem;
