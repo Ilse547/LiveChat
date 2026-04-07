@@ -1,8 +1,7 @@
   <template>
-    <div class="ProfileDiv">
-      <h1>Hello</h1>
-      <p>{{ username }}'s Profile</p>
-      <button @click="Logout" style="color: red;"> Logout </button>
+    <div class="Description">
+      <h1>Hello {{ username }}</h1>
+      <button class="InputButton" @click="Logout" style="background-color: red;"> Logout </button>
     </div>
   </template>
 
