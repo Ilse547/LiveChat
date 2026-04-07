@@ -28,7 +28,7 @@ const gun = Gun({
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to mongodb db'))
-  .catch((err) => console.log('Couldnt connect to mongodb db', err));
+  .catch((err) => console.log('Could not connect to the mongodb', err));
 
 
 app.use(express.json());
@@ -44,10 +44,10 @@ app.post('/login',async (req, res) =>{
     const {Username, Password} = req.body;
     const User = await Usermodel.findOne({username: Username});  
 
-    if(!User) return res.status(401).json({message : 'no user fund with this naea'});
+    if(!User) return res.status(401).json({message : 'There Is no user with that username'});
 
     const IsValidPassword = await User.ComparePassword(Password);
-    if(!IsValidPassword) return res.status(401).json({message : 'pssword doesnt match the user'});
+    if(!IsValidPassword) return res.status(401).json({message : 'Password and Username combination not found'});
 
     const Payload = {
       username : User.username,
@@ -62,8 +62,8 @@ app.post('/login',async (req, res) =>{
     res.status(200).json({message : 'Login successful', token});
 
   } catch(err){
-    console.error('Problem during login', err);
-    res.status(500).json({message : 'Problem durng the loging in process'})
+    console.error('There was aproblem while logging in', err);
+    res.status(500).json({message : 'There was a problem during the login process'})
   }
 
 });
@@ -84,17 +84,17 @@ app.post('/register', async (req, res) => {
       password : Password
     });
     await NewUser.save();
-    console.log('User was saved to db');
-    res.status(200).json({message : 'Woked'})
+    console.log('The user was saved to the DB');
+    res.status(200).json({message : 'Worked'})
   }catch(err){
     console.log('error while saving suer to db', err)
-    res.status(400).json({error: "error creating user"});
+    res.status(400).json({error: "There was an error creating the user"});
   }
 })
 
 app.get('/verify', VerifyToken, (req, res) => {
   console.log('req.user:', req.user); 
-  res.status(200).json({ message : 'Token is valid', user: req.user });
+  res.status(200).json({ message : 'Your Token is invalid', user: req.user });
 })
 
 
