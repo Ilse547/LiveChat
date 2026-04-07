@@ -4,7 +4,7 @@
 
     <nav class="Sidebar">
         <p> Logged in as:</p>
-        <h3 @click='GoToProfile' style='cursor: pointer'> {{ username }} </h3>
+        <button @click='GoToProfile' class="InputButton" style='cursor: pointer'> {{ username }} </button>
         <hr class="NavigationBarDivider" >
         <h1>Groups:</h1>
     </nav>
