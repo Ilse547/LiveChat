@@ -16,7 +16,7 @@ jest.mock('mongoose', () => ({
 const app = require ('../app');
 const UserModel = require('../models/user');
 describe('POST /register', () => {
-  it('reject if username is already takes', async() => {
+  it('should reject if username is already takes', async() => {
     UserModel.findOne.mockResolvedValue({ username : 'www'});
     const res = await request(app)
       .post('/register')
@@ -24,7 +24,7 @@ describe('POST /register', () => {
     expect(res.status).toBe(400);
     expect(res.body.message).toBe('This Username is already taken');
   });
-  it('return 200 when registering a new user', async() => {
+  it('should return 200 when registering a new user', async() => {
     UserModel.findOne.mockResolvedValue(null);
     const res = await request(app)
       .post('/register')
