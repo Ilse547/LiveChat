@@ -19,7 +19,7 @@ code {
     position: fixed;
     top:0;
     left:0;
-    width:150px;
+    width:fit-content;
     background-color: #d3c0da;
     padding:1rem;
     box-shadow: 1px 1px 15px;
