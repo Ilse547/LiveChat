@@ -16,30 +16,28 @@ code {
   font-size: 105%;
 }
 .Sidebar{
-    position: fixed;
+    position: relative;
     top:0;
     left:0;
     width:fit-content;
+    flex-shrink: 0;
     background-color: #d3c0da;
     padding:1rem;
     box-shadow: 1px 1px 15px;
-    height: 100%;
+    height: 100vh;
 }
-.ChatDiv{flex:1;}
-.ChatMain{
+.ChatDiv{
     display: flex;
-    height:100vh;
-    width: 100vh;
+    flex-direction: row;
+    height: 100vh;
 }
 .ChatMain{
-    margin-left:150px;
-    flex:1;
-    display:flex;
+    flex: 1;
+    display: flex;
     flex-direction: column;
-    height:100vh;
     overflow: hidden;
-    padding:1rem;
-    width: calc(100vw - 150px);
+    padding: 1rem;
+    height:100vh;
 }
 .input-container{
     display:flex;
