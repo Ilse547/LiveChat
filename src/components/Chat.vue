@@ -16,7 +16,7 @@
       <div class="MessageDiv">
         <p v-for="message in messages" :key="message.id">
           <strong>{{ message.username }}</strong>: {{ message.text }}
-          <button v-if="message.username === username" @click="DeleteMessage(message.id)" class="DeleteButton"> Del your message</button>
+          <button v-if="message.username === username" @click="DeleteMessage(message.id)" class="DeleteMessageButton"> Del your message</button>
         </p>
       </div>
 

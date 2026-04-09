@@ -84,6 +84,12 @@ code {
     width: 150px;
     background-color: #b1ffb1;
 }
+.DeleteMessageButton {
+    height: fit-content;
+    border-radius: 5px;
+    width: 150px;
+    background-color: #ff6b6b;
+}
 #RegisterPageRedirect, #LoginPageRedirect {
     background-color: #b1ffb1;
 }
