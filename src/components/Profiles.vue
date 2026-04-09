@@ -1,6 +1,7 @@
   <template>
     <div class="Description">
       <h1>Hello {{ username }}</h1>
+      <p> Admin status: </p>
       <button class="InputButton" @click="Logout" style="background-color: red;"> Logout </button>
     </div>
   </template>

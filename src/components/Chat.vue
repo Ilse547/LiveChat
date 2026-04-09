@@ -66,7 +66,10 @@
             this.gun.get('chat').map().on((message) => {
               if(message && message.text) {
                 const exists = this.messages.find(m => m.id === message.id);
-                if(!exists){ this.messages.push(message); }
+                if(!exists){ 
+                this.messages.push(message);
+                this.messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+                }
               }
             });
 

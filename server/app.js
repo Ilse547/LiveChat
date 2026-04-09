@@ -19,6 +19,7 @@ const JWT_KEY = process.env.JWT_KEY;
 
 const gun = Gun({
   web : server,
+  file: 'data',
   peers : [
     'https://livechat-qx1k.onrender.com/gun',
   ]
