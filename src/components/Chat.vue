@@ -5,7 +5,8 @@
     <nav class="Sidebar">
         <p> Logged in as:</p>
         <button @click='GoToProfile' class="InputButton" style='cursor: pointer'> {{ username }} </button>
-        <hr class="NavigationBarDivider" >
+        <hr class="NavigationBarDivider">
+        <button class="InputButton" @click="CreateGroup" > Create Group</button>
         <h1>Groups:</h1>
     </nav>
 
@@ -100,6 +101,9 @@
       DeleteMessage(id) {
       this.gun.get('chat').get(id).put(null);
       this.messages = this.messages.filter(m => m.id !== id);
+      },
+      CreateGroup (){
+        window.location.href = "/creategroup"
       }
     }
   }
