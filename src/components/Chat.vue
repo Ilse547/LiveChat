@@ -16,6 +16,7 @@
       <div class="MessageDiv">
         <p v-for="message in messages" :key="message.id">
           <strong>{{ message.username }}</strong>: {{ message.text }}
+          <button v-if="message.username === username" @click="DeleteMessage(message.id)" class="DeleteButton"> Del your message</button>
         </p>
       </div>
 
@@ -95,6 +96,10 @@
         };
         this.gun.get('chat').get(message.id).put(message);
         this.NewMessage = '';
+      },
+      DeleteMessage(id) {
+      this.gun.get('chat').get(id).put(null);
+      this.messages = this.messages.filter(m => m.id !== id);
       }
     }
   }
