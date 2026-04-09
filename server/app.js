@@ -98,9 +98,6 @@ app.get('/verify', VerifyToken, (req, res) => {
   res.status(200).json({ message : 'Your Token is invalid', user: req.user });
 })
 
-
-
-
 app.get('/', (req, res) => {
   res.redirect('/home');
 });
@@ -117,7 +114,7 @@ app.get('/chat', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/chat.html'));
 });
 
-app.get('/group', VerifyToken, (req,res)=>{
+app.get('/group/:groupname', VerifyToken, (req,res)=>{
   res.sendFile(path.join(__dirname, '../dist/group.html'));
 });
 
