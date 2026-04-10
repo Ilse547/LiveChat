@@ -9,7 +9,8 @@ module.exports = {
     login: './src/pages/login.js',
     register: './src/pages/register.js',
     group: './src/pages/group.js',
-    profiles: `./src/pages/profiles.js`
+    profiles: `./src/pages/profiles.js`,
+    creategroup: './src/pages/creategroup.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -69,6 +70,11 @@ module.exports = {
     template: './public/index.html',
     filename: 'profiles.html',
     chunks: ['profiles']
+  }),
+  new HtmlWebpackPlugin({
+    template: './public/index.html',
+    filename: 'creategroup.html',
+    chunks: ['creategroup']
   })
   ],
   mode: 'development'

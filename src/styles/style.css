@@ -58,7 +58,7 @@ code {
     border-radius: 5px;
     box-sizing: border-box;
 }
-.LoginInputArea, .RegisterInputArea, .Description{
+.LoginInputArea, .RegisterInputArea, .Description, .CreateGroup{
     display: flex;
     flex-direction: column;
     align-items: center;

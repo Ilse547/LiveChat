@@ -103,7 +103,7 @@
       this.messages = this.messages.filter(m => m.id !== id);
       },
       CreateGroup (){
-        window.location.href = "/creategroup"
+        window.location.href = '/creategroup';
       }
     }
   }
