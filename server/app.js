@@ -98,9 +98,28 @@ app.get('/verify', VerifyToken, (req, res) => {
   res.status(200).json({ message : 'Your Token is invalid', user: req.user });
 })
 
+
+app.get('/creategroup',  (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist/creategroup.html'));
+})
+
 app.get('/', (req, res) => {
   res.redirect('/home');
 });
+
+
+app.get('/user/exists/:username', async (req, res) => {
+  try {
+    const user = await Usermodel.findOne({ username: req.params.username });
+    res.status(200).json({ exists: !!user });
+  } catch (err) {
+    console.error('error looking if user eistrs', err);
+    res.status(500).json({ exists: false });
+  }
+});
+
+
+
 
 app.get('/user/:username', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/profiles.html'));
