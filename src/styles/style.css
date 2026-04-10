@@ -107,3 +107,16 @@ a:hover {
     margin-top: 4px;
     margin-bottom: 4px;
 }
+@media (max-width: 1000px) {
+    .Sidebar {
+        width: 200px;
+        padding: 0.75rem;
+    }
+    .InputButton, .DeleteMessageButton{
+        width: 120px;
+        font-size: 0.9rem;
+    }
+    .LoginInputArea, .RegisterInputArea, .Description, .CreateGroup {
+        width: 260px;
+    }
+}
