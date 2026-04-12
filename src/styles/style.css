@@ -145,10 +145,19 @@ a:hover {
         font-size: 0.9rem;
     }
     .TextInput { width: 100%; }
+    
     .LoginInputArea, .RegisterInputArea, .Description, .CreateGroup{
         width: 100%;
         white-space: normal;
         padding: 0.75rem;
     }
     .MessageDiv { padding: 0.5rem; }
+
+    .DeleteMessageButton {
+        width: auto;
+        padding: 0.2rem 0.5rem;
+        font-size: 0.75rem;
+        vertical-align: middle;
+        margin-left: 0.4rem;
+    }
 }
