@@ -150,7 +150,7 @@ app.get('/test', (req, res) => {
 
 
 if(require.main == module) {
-  server.listen(PORT, () =>{
+  server.listen(PORT, '0.0.0.0',  () =>{
     console.log(`server runnin on http:://localhost:${PORT}`);
   });
 }
