@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const { VerifyToken } = require('./middleware/verifytoken');
 const Gun = require('gun');
 const http = require('http');
+const GroupModel = require('./models/group')
 
 dotenv.config();
 
@@ -97,6 +98,29 @@ app.get('/verify', VerifyToken, (req, res) => {
   console.log('req.user:', req.user); 
   res.status(200).json({ message : 'Your Token is invalid', user: req.user });
 })
+
+app.post('/creategroup', VerifyToken, async (req, res) =>{
+  const { GroupName, Participants } = req.body;
+  if (!GroupName) { return res.status(400).json({message: "No gorup name was given"}); }
+
+  if (!Participants || Participants.length===0) { return res.status(400).json({message:" Group must have at least 2 members"}); }
+
+  try {
+    const ExistingGroup = await GroupModel.findOne({ GroupName });
+    if (ExistingGroup) { return res.status(400).json({ message : "the chosen name already exists" }); }
+    const newGroup = new GroupModel({ 
+      GroupName,
+      Participants: [...Participants, req.user.username]
+    });
+    await newGroup.save();
+    res.status(201).json({ message: "Group was successfully created" });
+  } catch(err){
+    console.error('there was an error while creating the group', err);
+    res.status(500).json({ message: "There was a problem creating the group"});
+  };
+
+});
+
 
 
 app.get('/creategroup',  (req, res) => {
