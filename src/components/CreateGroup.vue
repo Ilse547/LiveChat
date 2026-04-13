@@ -25,6 +25,7 @@ export default {
   name: 'CreateGroup',
   data() {
     return {
+      GroupName: '',
       participants: ['', '', '', ''],
       verified: []
     };
@@ -41,7 +42,7 @@ export default {
         const data = await response.json();
         if(data.exists) {
 
-          this.verified.push(index);
+          this.verified.push(username);
           this.participants.splice(index, 1);
         } else {
           alert(`Ùser doesnt exist`);

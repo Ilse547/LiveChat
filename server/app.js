@@ -99,6 +99,7 @@ app.get('/verify', VerifyToken, (req, res) => {
   res.status(200).json({ message : 'Your Token is invalid', user: req.user });
 })
 
+
 app.post('/creategroup', VerifyToken, async (req, res) =>{
   const { GroupName, Participants } = req.body;
   if (!GroupName) { return res.status(400).json({message: "No gorup name was given"}); }
@@ -142,6 +143,17 @@ app.get('/user/exists/:username', async (req, res) => {
   }
 });
 
+app.get('/groups', VerifyToken, async (req, res) => {
+  try {
+    const groups = await GroupModel.find({
+      Participants: req.user.username
+    });
+    res.status(200).json({ groups });
+  } catch(err) {
+    sonsole.error('problem while fetching groups ', err);
+    res.status(400).json({ message: 'problem while fethcing groups'});
+  }
+});
 
 
 

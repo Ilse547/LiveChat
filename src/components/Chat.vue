@@ -8,6 +8,16 @@
         <hr class="NavigationBarDivider">
         <button class="InputButton" @click="CreateGroup" > Create Group</button>
         <h1>Groups:</h1>
+
+        <div v-if="groups.length === 0">
+          <p> No groups </p>
+        </div>
+
+        <div v-for="group in groups" :key="group._id">
+          <button class="InputButton" @click="GoToGroup(group.GroupName)">
+            {{ group.GroupName }}
+          </button>
+        </div>
     </nav>
 
 
@@ -38,7 +48,8 @@
         username : '',
         NewMessage : '',
         messages : [],
-        gun : null
+        gun : null,
+        groups: []
       }
     },
       async mounted() {
@@ -77,6 +88,7 @@
 
             const data = await response.json();
             this.username = data.user.username;
+            await this.FetchGroups();
           }
         } catch(err) {
           console.error('token verification failed', err);
@@ -104,7 +116,26 @@
       },
       CreateGroup (){
         window.location.href = '/creategroup';
-      }
+      },
+      async FetchGroups() {
+        const token = localStorage.getItem('token');
+        try{
+          const response = await fetch('/groups', {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          const data = await response.json();
+          if(response.ok) {
+            this.groups = data.groups;
+          }
+        } catch(err) {
+          console.error('Provlem getting groups', err);
+        }
+      }, GoToGroup(groupName) {
+        window.location.href = `/group/${groupName}`;
+      },
     }
   }
 </script>
