@@ -49,7 +49,8 @@
         NewMessage : '',
         messages : [],
         gun : null,
-        groups: []
+        groups: [],
+        groupName: '',
       }
     },
       async mounted() {
