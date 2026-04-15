@@ -7,7 +7,7 @@
     <main>
         <h1>Group Chat</h1>
         <div class="ChatDiv">
-          <p>Messages</p>
+          <p>HHEHIEIEI</p>
         </div>
         <div class="InputArea">
           <input aria-label="Message Input Box" class="TextInput" id="MessageInputField" type="text" placeholder="Write your message here">
