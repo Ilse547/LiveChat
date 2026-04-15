@@ -150,10 +150,17 @@ app.get('/groups', VerifyToken, async (req, res) => {
     });
     res.status(200).json({ groups });
   } catch(err) {
-    sonsole.error('problem while fetching groups ', err);
+    console.error('problem while fetching groups ', err);
     res.status(400).json({ message: 'problem while fethcing groups'});
   }
 });
+//GROUPCHaT PAGE
+
+
+app.get('/group/:groupname', (req,res)=>{
+  res.sendFile(path.join(__dirname, '../dist/group.html'));
+});
+
 
 
 
@@ -169,9 +176,6 @@ app.get('/chat', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/chat.html'));
 });
 
-app.get('/group/:groupname', VerifyToken, (req,res)=>{
-  res.sendFile(path.join(__dirname, '../dist/group.html'));
-});
 
 app.get('/login', (req, res)=>{
   res.sendFile(path.join(__dirname, '../dist/login.html'));
