@@ -110,11 +110,11 @@
           text : this.NewMessage,
           timestamp : new Date().toISOString()
         };
-        this.gun.get('chat').get(message.id).put(message);
+        this.gun.get(`group-${this.groupName}`).get(message.id).put(message);
         this.NewMessage = '';
       },
       DeleteMessage(id) {
-      this.gun.get('chat').get(id).put(null);
+      this.gun.get(`group-${this.groupName}`).get(id).put(null);
       this.messages = this.messages.filter(m => m.id !== id);
       },
       CreateGroup (){
