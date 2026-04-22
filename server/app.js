@@ -38,7 +38,11 @@ app.use(express.urlencoded({ extended : true }));
 app.use(logger);
 app.use(express.static(path.join(__dirname, '../dist')));
 
- 
+app.get('/favicon.ico', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/favicon.ico'));
+});
+
+
 //LOGIN LOGIC
 
 app.post('/login',async (req, res) =>{
