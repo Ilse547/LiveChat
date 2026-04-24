@@ -6,3 +6,9 @@ jest.mock('../models/group', () => {
 	MockGroupModel.findOne = jest.fn();
 	return MockGroupModel;
 });
+
+jest.mock('../models/user', () => {
+	const MockUserModel = jest.fn().mockImplementation(()=> ({}));
+	MockUserModel.findOne = jest.fn();
+	return MockUserModel;
+});
