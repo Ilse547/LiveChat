@@ -33,7 +33,7 @@ describe('GET /groupinfo/:groupname', () => {
 		const token = CreateToken('William');
 		const res = await request(app)
 			.get('/groupinfo/testgroup')
-			.set('Authoriźation', `Bearer ${token}`);
+			.set('Authorization', `Bearer ${token}`);
 		expect(res.status).toBe(200);
 		expect(res.body.group.GroupName).toBe('testgroup');
 	});
