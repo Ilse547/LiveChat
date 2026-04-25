@@ -74,11 +74,17 @@
             localStorage.removeItem('token');
             window.location.href = '/login';
           } else {
+            const data = await response.json();
+            this.username = data.user.username;
+            await this.FetchGroups();
+            
+            const IsMember = await this.FetchGroupInfo()
+            if(!IsMember) return
             this.gun = Gun({
               peers : [
                 'https://livechat-qx1k.onrender.com/gun',
               ]
-            })
+            });
 
             this.gun.get(`group-${this.groupName}`).map().on((message) => {
               if(message && message.text) {
@@ -90,15 +96,13 @@
               }
             });
 
-            const data = await response.json();
-            this.username = data.user.username;
-            await this.FetchGroups();
           }
         } catch(err) {
           console.error('token verification failed', err);
           window.location.href = '/login';
         }
     },
+
     methods: {
       GoToProfile() {
       window.location.href = `/user/${this.username}`;
@@ -140,6 +144,19 @@
       }, GoToGroup(groupName) {
         window.location.href = `/group/${groupName}`;
       },
+      async FetchGroupInfo() {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`/groupinfo/${this.groupName}`, {
+          method: 'GET',
+          headers: {'Authorization':`Bearer ${token}`}
+        })
+        if(!response.ok) {
+          window.location.href = '/chat'
+          return false
+        }
+      return true
+      }
+
     }
   }
 </script>
