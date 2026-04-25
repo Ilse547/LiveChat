@@ -43,7 +43,8 @@ app.use(helmet({
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-eval'"],
       connectSrc: ["'self'", "https://livechat-qx1k.onrender.com"],
-      styleSrc: ["'self'", "'unsafe-inline'"]
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:"],
     }
   }
 }));
