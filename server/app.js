@@ -9,6 +9,7 @@ const { VerifyToken } = require('./middleware/verifytoken');
 const Gun = require('gun');
 const http = require('http');
 const GroupModel = require('./models/group')
+const helmet = require('helmet');
 
 dotenv.config();
 
@@ -36,6 +37,16 @@ mongoose.connect(process.env.MONGO_URI)
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
 app.use(logger);
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-eval'"],
+      connectSrc: ["'self'", "https://livechat-qx1k.onrender.com"],
+      styleSrc: ["'self'", "'unsafe-inline'"]
+    }
+  }
+}));
 app.use(express.static(path.join(__dirname, '../dist')));
 
 app.get('/favicon.ico', (req, res) => {
