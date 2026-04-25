@@ -127,6 +127,22 @@ app.post('/creategroup', VerifyToken, async (req, res) =>{
 });
 
 
+app.get('/groupinfo/:groupname', VerifyToken, async (req, res) => {
+  try {
+    const group = await GroupModel.findOne({ GroupName: req.params.groupname });
+    if (!group) {
+      return res.status(404).json({ message: 'Group not found' });
+    }
+    if (!group.Participants.includes(req.user.username)) {
+      return res.status(402).json({ message: 'Your are not part of this group' });
+    }
+    res.status(200).json({ group });
+  } catch(err) {
+    console.error('Problem etting group info', err);
+    res.status(500).json({ message: 'Error getting group info', err});
+  }
+});
+
 
 app.get('/creategroup',  (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/creategroup.html'));
