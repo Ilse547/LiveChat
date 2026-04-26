@@ -42,6 +42,9 @@
 	Password:  testtest  
 	username:  test  
 
+	Password:  testtest  
+	username:  nottest  
+
 	## Toolkit
 	### Live Communication:
 	The live communication will be handled by [GUNjs](https://gun.eco/)
@@ -66,7 +69,7 @@
 
 	All Functions in their seperate file, imported in the app.js file.  
 	Automatic tests:   
-
+	
 	### Testing:
 	The project uses the jest and supertest libraries to run tests  
 
