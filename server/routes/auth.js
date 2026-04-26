@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Usermodel = require('../models/user');
 const jwt = require('jsonwebtoken');
-cost VerifyToken = require('../middleware/verifytoken');
+const { VerifyToken } = require('../middleware/verifytoken');
 const JWT_KEY = process.env.JWT_KEY;
 
 //LOGIN LOGIC
