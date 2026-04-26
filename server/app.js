@@ -47,7 +47,7 @@ app.use(helmet({
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-eval'"],
-      connectSrc: ["'self'", "https://livechat-qx1k.onrender.com"],
+      connectSrc: ["'self'", "https://livechat-qx1k.onrender.com", "wss://livechat-qx1k.onrender.com"],
       styleSrc: ["'self'", "'unsafe-inline'"],
       imgSrc: ["'self'", "data:"],
     }
