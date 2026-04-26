@@ -4,12 +4,13 @@ const router = express.Router();
 const Usermodel = require('../models/user');
 const jwt = require('jsonwebtoken');
 const { VerifyToken } = require('../middleware/verifytoken');
-const JWT_KEY = process.env.JWT_KEY;
+
 
 //LOGIN LOGIC
 
 router.post('/login',async (req, res) =>{
   try{
+    const JWT_KEY = process.env.JWT_KEY;
     const {Username, Password} = req.body;
     const User = await Usermodel.findOne({username: Username});  
 
