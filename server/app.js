@@ -13,6 +13,11 @@ const { logger } = require('./middleware/logger');
 const { VerifyToken } = require('./middleware/verifytoken');
 const GroupModel = require('./models/group')
 
+//ROUTES
+const AuthRoutes = require('./routes/auth');
+const GroupRoutes = require('./routes/group');
+const PageRoutes = require('./routes/pages');
+
 
 dotenv.config();
 
@@ -55,7 +60,7 @@ app.use(RateLimiter);
 app.use('/login', AuthRateLimiter);
 app.use('/register', AuthRateLimiter);
 
-
+  
 if(require.main == module) {
   server.listen(PORT, '0.0.0.0',  () =>{
     console.log(`server runnin on http:://localhost:${PORT}`);
