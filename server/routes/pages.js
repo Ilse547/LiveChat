@@ -1,1 +1,56 @@
 //Pages routes
+
+const express = require('express');
+const router = express.Router();
+const path = require('path');
+
+app.get('/', (req, res) => {
+  res.redirect('/home');
+});
+
+app.get('/home', (req, res) =>{
+  res.sendFile(path.join(__dirname, '../dist/home.html'));
+});
+
+app.get('/chat', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/chat.html'));
+});
+
+app.get('/login', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../dist/login.html'));
+});
+
+app.get('/register', (req,res)=>{
+  res.sendFile(path.join(__dirname, '../dist/register.html'));
+});
+
+app.get('/creategroup',  (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist/creategroup.html'));
+});
+
+app.get('/group/:groupname', (req,res)=>{
+  res.sendFile(path.join(__dirname, '../dist/group.html'));
+});
+
+app.get('/user/:username', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/profiles.html'));
+});
+
+app.get('/user/exists/:username', async (req, res) => {
+  try {
+    const user = await Usermodel.findOne({ username: req.params.username });
+    res.status(200).json({ exists: !!user });
+  } catch (err) {
+    console.error('error looking if user eistrs', err);
+    res.status(500).json({ exists: false });
+  }
+});
+
+//IDK ROUTES
+app.get('/test', (req, res) => {
+  res.json({message: "test works"});
+});
+
+app.get('/favicon.ico', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/favicon.ico'));
+});
