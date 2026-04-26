@@ -18,4 +18,4 @@ const AuthRateLimiter = ratelimit({
   message: 'Too many Authentication atempts'
 });
 
-module exports = { RateLimiter, AuthRateLimiter };
+module.exports = { RateLimiter, AuthRateLimiter };
