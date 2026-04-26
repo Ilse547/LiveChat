@@ -1,9 +1,9 @@
 //Group routes
 
-const express = require(express);
+const express = require('express');
 const router = express.Router();
 const GroupModel = require('../models/group');
-const { VerifyToken } = require ('../middleware/verifytoken');
+const { VerifyToken } = require('../middleware/verifytoken');
 
 //Create group
 router.post('/creategroup', VerifyToken, async (req, res) =>{
