@@ -10,6 +10,7 @@ const Gun = require('gun');
 const http = require('http');
 const GroupModel = require('./models/group')
 const helmet = require('helmet');
+const RateLimit require('express-rate-limit')
 
 dotenv.config();
 
@@ -27,7 +28,14 @@ const gun = Gun({
   ]
 });
 
-
+const RateLimiter = RateLimit({
+  windowMs: 15*60*1000,
+  limit: 100,
+  standardHeaders: 'draft-8',
+  legacyHeaders: false,
+  ipv6Subnet: 48,
+  message: 'Too many reqs made try later'
+});
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to mongodb db'))
@@ -49,6 +57,8 @@ app.use(helmet({
   }
 }));
 app.use(express.static(path.join(__dirname, '../dist')));
+app.use(RateLimiter);
+
 
 app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/favicon.ico'));
