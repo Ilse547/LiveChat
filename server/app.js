@@ -60,6 +60,10 @@ app.use(RateLimiter);
 app.use('/login', AuthRateLimiter);
 app.use('/register', AuthRateLimiter);
 
+
+app.use(AuthRoutes);
+app.use(GroupRoutes);
+app.use(PageRoutes);
   
 if(require.main == module) {
   server.listen(PORT, '0.0.0.0',  () =>{
