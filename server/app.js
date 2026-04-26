@@ -37,6 +37,15 @@ const RateLimiter = RateLimit({
   message: 'Too many reqs made try later'
 });
 
+const AuthRateLimiter = RateLimit({
+  windowMs: 10*60*1000,
+  limit: 5,
+  standardHeaders: 'draft-8',
+  legacyHeaders: false,
+  ipv6Subnet: 60,
+  message: 'Too many Authentication atempts'
+});
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to mongodb db'))
   .catch((err) => console.log('Could not connect to the mongodb', err));
@@ -58,7 +67,8 @@ app.use(helmet({
 }));
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(RateLimiter);
-
+app.use('/login', AuthRateLimiter);
+app.use('/register', AuthRateLimiter);
 
 app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/favicon.ico'));
