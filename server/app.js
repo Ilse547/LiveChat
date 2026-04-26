@@ -63,7 +63,7 @@ app.use('/register', AuthRateLimiter);
   
 if(require.main == module) {
   server.listen(PORT, '0.0.0.0',  () =>{
-    console.log(`server runnin on http:://localhost:${PORT}`);
+    console.log(`server runnin on http://localhost:${PORT}`);
   });
 }
 module.exports=app
