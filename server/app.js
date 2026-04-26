@@ -10,7 +10,7 @@ const Gun = require('gun');
 const http = require('http');
 const GroupModel = require('./models/group')
 const helmet = require('helmet');
-const RateLimit require('express-rate-limit')
+const {RateLimiter, AuthRateLimiter} = require('./middleware/ratelimiter')
 
 dotenv.config();
 
@@ -26,24 +26,6 @@ const gun = Gun({
   peers : [
     'https://livechat-qx1k.onrender.com/gun',
   ]
-});
-
-const RateLimiter = RateLimit({
-  windowMs: 15*60*1000,
-  limit: 100,
-  standardHeaders: 'draft-8',
-  legacyHeaders: false,
-  ipv6Subnet: 48,
-  message: 'Too many reqs made try later'
-});
-
-const AuthRateLimiter = RateLimit({
-  windowMs: 10*60*1000,
-  limit: 5,
-  standardHeaders: 'draft-8',
-  legacyHeaders: false,
-  ipv6Subnet: 60,
-  message: 'Too many Authentication atempts'
 });
 
 mongoose.connect(process.env.MONGO_URI)
