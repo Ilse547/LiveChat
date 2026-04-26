@@ -31,7 +31,7 @@ const gun = Gun({
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to mongodb db'))
   .catch((err) => console.log('Could not connect to the mongodb', err));
-
+  
 
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
@@ -57,36 +57,7 @@ app.get('/favicon.ico', (req, res) => {
 });
 
 
-//LOGIN LOGIC
 
-app.post('/login',async (req, res) =>{
-  try{
-    const {Username, Password} = req.body;
-    const User = await Usermodel.findOne({username: Username});  
-
-    if(!User) return res.status(401).json({message : 'There Is no user with that username'});
-
-    const IsValidPassword = await User.ComparePassword(Password);
-    if(!IsValidPassword) return res.status(401).json({message : 'Password and Username combination not found'});
-
-    const Payload = {
-      username : User.username,
-      id : User._id,
-      admin: User.admin
-    };
-
-    const token = jwt.sign(Payload, JWT_KEY, {expiresIn: '12h'});
-
-
-    console.log(`The user: ${User.username} logged in`);
-    res.status(200).json({message : 'Login successful', token});
-
-  } catch(err){
-    console.error('There was aproblem while logging in', err);
-    res.status(500).json({message : 'There was a problem during the login process'})
-  }
-
-});
 
 
 
