@@ -10,6 +10,8 @@ jest.mock('../models/user', () => {
 
 jest.mock('mongoose', () => ({
   connect : jest.fn().mockResolvedValue(true),
+  Schema: jest.fn().mockImplementation(() => ({})),
+  model: jest.fn().mockReturnValue({})
 }));
 
 
