@@ -15,6 +15,12 @@ const userSchema = new mongoose.Schema
     required : true,
     minlength : 8,
   },
+  email : {
+    type: String,
+    required: true,
+    unique : true,
+    match: [\S+@\S+\.\S+, 'Not an email']
+  }
 });
 
 userSchema.pre('save', async function() {
