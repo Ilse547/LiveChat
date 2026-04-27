@@ -14,10 +14,12 @@ jest.mock('../models/user', () => {
 });
 
 jest.mock('mongoose', ()=> ({
-	connect: jest.fn().mockResolvedValue(true)
+	connect: jest.fn().mockResolvedValue(true),
+	schema: jest.fn().mockResolvedValue(() => ({})),
+	model: jest.fn().mockReturnValue({})
 }));
 
-const app require('../app');
+const app = require('../app');
 const GroupModel = require('../models/group');
 
 function CreateToken(username) {
@@ -39,7 +41,7 @@ describe('GET /groupinfo/:groupname', () => {
 	});
 
 	it('should return 402 if a user is not a prticipant', async () => {
-		Groupmodel.findOne.mockResolvedValue({
+		GroupModel.findOne.mockResolvedValue({
 			GroupName:'testgroup',
 			Participants: ['Bob', 'John', 'William']
 		});
@@ -47,7 +49,7 @@ describe('GET /groupinfo/:groupname', () => {
 		const res = await request(app)
 			.get('/groupinfo/testgroup')
 			.set('Authorization', `Bearer ${token}`);
-		expect(res.status).toBe(200);
+		expect(res.status).toBe(402);
 		expect(res.body.message).toBe('You arent part of this group');
 	});
 
