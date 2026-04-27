@@ -15,10 +15,6 @@ const userSchema = new mongoose.Schema
     required : true,
     minlength : 8,
   },
-  admin : {
-    type : Boolean,
-    default : false
-  }
 });
 
 userSchema.pre('save', async function() {
