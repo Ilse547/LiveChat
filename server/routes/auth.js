@@ -4,6 +4,7 @@ const router = express.Router();
 const Usermodel = require('../models/user');
 const jwt = require('jsonwebtoken');
 const { VerifyToken } = require('../middleware/verifytoken');
+const { SendConfirmationEmail } = require('../services/email');
 
 
 //LOGIN LOGIC
@@ -55,6 +56,9 @@ router.post('/register', async (req, res) => {
       email : Email
     });
     await NewUser.save();
+
+    await SendConfirmationEmail(Email, Username);
+
     console.log('The user was saved to the DB');
     res.status(200).json({message : 'Worked'})
   }catch(err){
