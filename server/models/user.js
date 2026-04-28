@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema
     type: String,
     required: true,
     unique : true,
+    lowercase : true,
     match: [\S+@\S+\.\S+, 'Not an email']
   }
 });
