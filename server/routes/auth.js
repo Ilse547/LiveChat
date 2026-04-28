@@ -11,8 +11,8 @@ const { VerifyToken } = require('../middleware/verifytoken');
 router.post('/login',async (req, res) =>{
   try{
     const JWT_KEY = process.env.JWT_KEY;
-    const {Username, Password} = req.body;
-    const User = await Usermodel.findOne({username: Username});  
+    const {Username, Password, Email} = req.body;
+    const User = await Usermodel.findOne({username: Username, email: Email});  
 
     if(!User) return res.status(401).json({message : 'There Is no user with that username'});
 
@@ -40,15 +40,19 @@ router.post('/login',async (req, res) =>{
 //REGISTER LOGIC
 router.post('/register', async (req, res) => {
 
-  const {Username, Password} = req.body;
+  const {Username, Password, Email} = req.body;
   try {
 
     const ExistingUsername = await Usermodel.findOne({username : Username});
     if(ExistingUsername) {return res.status(400).json({message : 'This Username is already taken'});}
 
+    const ExistingEmail = await Usermodel.findOne({ email: Email });
+    if(ExistingEmail) { return res.status(400).json({message : 'Email is already in use'});}
+
     const NewUser = new Usermodel ({
       username : Username,
-      password : Password
+      password : Password,
+      email : Email
     });
     await NewUser.save();
     console.log('The user was saved to the DB');
