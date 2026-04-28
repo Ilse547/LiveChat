@@ -4,7 +4,7 @@ const router = express.Router();
 const Usermodel = require('../models/user');
 const jwt = require('jsonwebtoken');
 const { VerifyToken } = require('../middleware/verifytoken');
-const { SendConfirmationEmail } = require('../services/email');
+const { SendConfirmationEmail } = require('../service/email');
 
 
 //LOGIN LOGIC
