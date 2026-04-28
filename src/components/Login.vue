@@ -7,6 +7,7 @@
             <p> please login</p>
 
             <input id="UsernameInput" class="TextInput" type="text" placeholder="Input your username">
+            <input id="EmailInput" class="TextInput" type="text" placeholder="Input your email">
             <input id="PasswordInput" class="TextInput" type="password" placeholder="Input your password">
             <button class="InputButton" @click="login">Login</button>
 
@@ -24,6 +25,7 @@
     data () {
       return {
         Username: '',
+        Email: '',
         Password: ''
       }
     },
@@ -38,6 +40,7 @@
         try {
           const Username = document.getElementById('UsernameInput').value;
           const Password = document.getElementById('PasswordInput').value;
+          const Email = document.getElementById('EmailInput').value;
           const response = await  fetch('/login',{
             method: 'POST',
 
@@ -45,6 +48,7 @@
 
             body: JSON.stringify({
               Username,
+              Email,
               Password
             })
           });
