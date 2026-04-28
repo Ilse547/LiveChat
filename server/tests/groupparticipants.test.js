@@ -1,5 +1,6 @@
 const request = require('supertest');
 const jwt = require('jsonwebtoken');
+process.env.JWT_KEY = 'TESTKEY';
 
 jest.mock('../models/group', () => {
 	const MockGroupModel = jest.fn().mockImplementation(() => ({}));
