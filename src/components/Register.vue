@@ -37,6 +37,7 @@ export default {
       try {
         const Username = document.getElementById('UsernameInput').value;
         const Password = document.getElementById('PasswordInput').value;
+        const Email = document.getElementById('EmailInput').value;
 
 
         const response = await fetch('/register',{
@@ -44,6 +45,7 @@ export default {
           headers:{'Content-Type' : 'application/json'},
           body : JSON.stringify({
             Username,
+            Email,
             Password
           })
         });
