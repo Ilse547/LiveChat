@@ -8,7 +8,9 @@
           <p> please Register</p>
 
           <input id="UsernameInput" class="TextInput" type="text" placeholder="Input your username">
+          <input id="EmailInput" class="TextInput" type="text" placeholder="Input your email">
           <input id="PasswordInput" class="TextInput" type="password" placeholder="Input your password">
+
 
           <button class="InputButton" @click="Register">Register</button>
           <button class="InputButton" id="LoginPageRedirect" @click="LoginPage">Login Page</button>
