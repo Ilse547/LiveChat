@@ -13,7 +13,6 @@ module.exports = {
     group: './src/pages/group.js',
     profiles: `./src/pages/profiles.js`,
     creategroup: './src/pages/creategroup.js',
-    confirmation: './src/pages/confirmation.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -83,11 +82,6 @@ module.exports = {
     template: './public/index.html',
     filename: 'creategroup.html',
     chunks: ['creategroup']
-  }),
-  new HtmlWebpackPlugin({
-    template: './public/index.html',
-    filename: 'confirmation.html',
-    chunks: ['confirmation']
   })
   ],
   mode: 'development'
