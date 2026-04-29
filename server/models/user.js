@@ -33,6 +33,7 @@ const userSchema = new mongoose.Schema
     default : false
   },
   ConfirmationCodeDate: { type: Date },
+  LastOnline: { type: Date }
 });
 
 userSchema.pre('save', async function() {
