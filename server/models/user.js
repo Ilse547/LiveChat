@@ -33,7 +33,11 @@ const userSchema = new mongoose.Schema
     default : false
   },
   ConfirmationCodeDate: { type: Date },
-  LastOnline: { type: Date }
+  LastOnline: {
+    type: Date
+    default: Date.now,
+    index: { expireAfterSeconds: 60*60*24*365 }
+  }
 });
 
 userSchema.pre('save', async function() {
