@@ -11,7 +11,7 @@ RateLimiter = ratelimit({
 
 const AuthRateLimiter = ratelimit({
   windowMs: 10*60*1000,
-  limit: 5,
+  limit: 20,
   standardHeaders: 'draft-8',
   legacyHeaders: false,
   ipv6Subnet: 60,
