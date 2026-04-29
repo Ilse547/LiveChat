@@ -39,7 +39,7 @@ mongoose.connect(process.env.MONGO_URI)
   .catch((err) => console.log('Could not connect to the mongodb', err));
 
 
-app.use(express.json());
+app.use(express.json({ limit: '50kb'}));
 app.use(express.urlencoded({ extended : true }));
 app.use(logger);
 app.use(helmet({
