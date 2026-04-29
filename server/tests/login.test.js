@@ -12,7 +12,8 @@ jest.mock('mongoose', () => ({
 }));
 
 jest.mock('../service/email', () => ({
-  SendConfirmationEmail: jest.fn().mockResolvedValue(true)
+  SendConfirmationEmail: jest.fn().mockResolvedValue(true),
+  SendLoginEmail: jest.fn().mockResolvedValue(true)
 }));
 process.env.JWT_KEY = 'TESTKEY';
 const app = require('../app');
@@ -41,14 +42,16 @@ describe('POST /login', () => {
   it('should return 209 and the token when a user logs in', async () => {
     UserModel.findOne.mockResolvedValue({
       Username: 'www',
+      email: 'www@iamcool.com',
       isConfirmed : true,
       _id: '111',
       ComparePassword: jest.fn().mockResolvedValue(true),
+      save: jest.fn().mockResolvedValue(true),
     });
     const res = await request(app)
       .post('/login')
       .send({ Username: 'www',Email: 'www@iamcool.com', Password:'Password123'});
     expect(res.status).toBe(200);
-    expect(res.body.token).toBeDefined();
+    expect(res.body.message).toBe('Code sent to your email');
   });
 });
