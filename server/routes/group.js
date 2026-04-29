@@ -55,7 +55,7 @@ router.get('/groupinfo/:groupname', VerifyToken, async (req, res) => {
     res.status(200).json({ group });
   } catch(err) {
     console.error('Problem etting group info', err);
-    res.status(500).json({ message: 'Error getting group info', err});
+    res.status(500).json({ message: 'Error getting group info'});
   }
 });
 
