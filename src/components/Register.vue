@@ -4,7 +4,7 @@
       <div class="Registration" >
 
         
-        <div class="RegisterInputArea">   
+        <div v-if="!registered" class="RegisterInputArea">   
           <p> please Register</p>
 
           <input id="UsernameInput" class="TextInput" type="text" placeholder="Input your username">
@@ -15,6 +15,14 @@
           <button class="InputButton" @click="Register">Register</button>
           <button class="InputButton" id="LoginPageRedirect" @click="LoginPage">Login Page</button>
         </div>
+
+        <div v-if="registered" class='RegisterInputArea'>
+          <h2> Confirm your account</h2>
+          <p>Enter the password In the email</p>
+          <input id="CodeInput" type="text" class="TextInput" placeholder="Enter the code">
+          <button class="InputButton" @click='Confirm'> confirm </button>
+        </div>
+
       </div>
     </main>
   </div>
@@ -23,6 +31,12 @@
 <script>
 export default {
   name: 'Register',
+  data() {
+    return{
+      registered: false,
+      Username: ''
+    }
+  },
   mounted() {
     document.title = 'Registration'
   },
@@ -51,8 +65,8 @@ export default {
         });
         if(response.ok) {
           console.log('REGISTRATION SUCCESSFUL, WROTE TO DB');
-          localStorage.setItem('TempUsername', Username);
-          window.location.href = '/confirm'
+          this.Username = Username;
+          this.registered  = true;
         } else {
           const err = await response.json();
           alert(err.message || 'Registration Failed');
@@ -62,8 +76,27 @@ export default {
       }catch (err){
         console.error('error during registration', err);
       }
+    },
+    async Confirm() {
+      try {
+        const Code = document.getElementsById('CodeInput').value;
+        const response = await fetch('/confirm', {
+          method: 'POST',
+          headers: { 'Content-Type' : 'application/json' },
+          body: JSON.stringify({ Username: this.Username, Code })
+        });
+        if(response.ok) {
+          alert('Account is now verified, you can log in');
+          window.location.href = '/login';
+        } else {
+          const err = await response.json();
+          alert(err.message || 'Invalid code');
+        }
+      } catch(err) {
+        console.error('Error confirming the account', err);
+        alert('Something went wrong');
+      }
     }
-
   }
 }
 </script>
