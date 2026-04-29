@@ -3,15 +3,22 @@
     <div>
       <main>
           
-          <div class="LoginInputArea">
-            <p> please login</p>
+        <div v-if="!CodeSent" class="LoginInputArea">
+          <p> please login</p>
 
-            <input id="UsernameInput" class="TextInput" type="text" placeholder="Input your username">
-            <input id="PasswordInput" class="TextInput" type="password" placeholder="Input your password">
-            <button class="InputButton" @click="login">Login</button>
+          <input id="UsernameInput" class="TextInput" type="text" placeholder="Input your username">
+          <input id="PasswordInput" class="TextInput" type="password" placeholder="Input your password">
+          <button class="InputButton" @click="login">Login</button>
 
-            <button class="InputButton" @click="RegisterPage" >RegisterPage</button>
-          </div>
+          <button class="InputButton" @click="RegisterPage" >RegisterPage</button>
+        </div>
+
+        <div v-if="CodeSent" class='RegisterInputArea'>
+          <h2>Verification</h2>
+          <p>Enter the code sent to your email</p>
+          <input id="CodeInput" type="text" class="TextInput" placeholder="Enter the code">
+          <button class="InputButton" @click='VerifyCode'> confirm </button>
+        </div>
 
 
       </main>
@@ -24,7 +31,8 @@
     data () {
       return {
         Username: '',
-        Password: ''
+        Password: '',
+        CodeSent: false
       }
     },
     mounted() {
@@ -40,9 +48,7 @@
           const Password = document.getElementById('PasswordInput').value;
           const response = await  fetch('/login',{
             method: 'POST',
-
             headers:{'Content-Type':'application/json'},
-
             body: JSON.stringify({
               Username,
               Password
@@ -50,11 +56,9 @@
           });
 
           if(response.ok) { 
-            const data = await response.json();
-            console.log('Login succeful, writing to db also ');
-            localStorage.setItem('token', data.token);
+            this.Username = Username;
+            this.CodeSent = true;
 
-            window.location.href = '/chat';
           } else {
             const err = await response.json();
             alert(err.message || 'Login faiels')
@@ -63,6 +67,31 @@
         }catch(err){
           console.log('Error during login', err);
           alert(err.message || 'Login Failed')
+        }
+      },
+
+      async VerifyCode() {
+        try {
+          const Code = document.getElementById('CodeInput').value;
+
+          const response = await fetch('/login/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ Username: this.Username, Code })
+          });
+
+          if(response.ok) {
+            const data = await response.json();
+            console.log('Login succeful, writing to db also ');
+            localStorage.setItem('token', data.token);
+            window.location.href = '/chat';
+          } else {
+            const err = await response.json();
+            alert(err.message || 'Not the code');
+          }
+        } catch(err){
+          console.error('error veryfinf the code', err);
+          alert('Somethign went wrong :(');
         }
       }
     }
