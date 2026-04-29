@@ -12,7 +12,7 @@ const GroupSchema = new mongoose.Schema
   Participants : {
     type : [String],
     required:true,
-    index: true
+    index: true 
   }
 });
 
