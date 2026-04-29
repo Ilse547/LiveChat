@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema
     required : true,
     unique : true,
     minlength : 3,
-    maxlength : 10
+    maxlength : 10,
+    index: true
   },
   password : {
     type : String,
@@ -20,7 +21,8 @@ const userSchema = new mongoose.Schema
     required: true,
     unique : true,
     lowercase : true,
-    match: [/\S+@\S+\.\S+/, 'Not an email']
+    match: [/\S+@\S+\.\S+/, 'Not an email'],
+    index: true
   },
   ConfirmationCode : {
     type: String,
