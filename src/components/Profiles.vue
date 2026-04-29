@@ -2,6 +2,7 @@
     <div class="Description">
       <h1>Hello {{ username }}</h1>
       <p> Admin status: </p>
+      <button class="InputButton" @click="ResetPassword" style="background-color: #ff6b6b;"> Reset password </button>
       <button class="InputButton" @click="Logout" style="background-color: #ff6b6b;"> Logout </button>
     </div>
   </template>
