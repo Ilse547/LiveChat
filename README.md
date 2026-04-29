@@ -28,22 +28,16 @@
 	In the .env file you should have:  
 	- ``` PORT = ...``` -> The Port the server is running on  
 	- ``` MONGO_URI = ...``` -> The URI to connect the server to the mongodb database
-	- ``` JWT_KEY = ...``` -> The JsonWebToken key to create a token  
+	- ``` JWT_KEY = ...``` -> The JsonWebToken key to create a token
+	- ``` EMAIL_PASS = ...``` -> The password for th email
+	- ``` EMAIL_USER = ...``` -> The email adress
 
 
 
 	## Authentication & Credentials:
-	### Credential:
-	Admin credentials:    
-	password:  Admin  
-	username:  Admin123	
+	The app requires an email for the verification codes
 
-	User credential:   
-	Password:  testtest  
-	username:  test  
 
-	Password:  testtest  
-	username:  nottest  
 
 	## Toolkit
 	### Live Communication:
@@ -72,11 +66,6 @@
 	
 	### Testing:
 	The project uses the jest and supertest libraries to run tests  
-
-
-	## How to run the project:
-	In the /backend folder run ```node app.js```
-
 
 	# file structure:
 
@@ -116,3 +105,9 @@
 	│   ├──tests  
 	│   │   ├── login.test.js  
 	│   │   └── *.test.js files
+	│   ├──routes  
+	│   │   ├── auth.js  
+	│   │   └── *.js files
+	│   ├──service  
+	│   │   ├── email.js  
+	│   │   └── *.js files
