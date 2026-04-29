@@ -13,8 +13,8 @@ const { SendConfirmationEmail } = require('../service/email');
 router.post('/login',async (req, res) =>{
   try{
     const JWT_KEY = process.env.JWT_KEY;
-    const {Username, Password, Email} = req.body;
-    const User = await Usermodel.findOne({username: Username, email: Email});  
+    const {Username, Password} = req.body;
+    const User = await Usermodel.findOne({username: Username});  
 
     if(!User) return res.status(401).json({message : 'There Is no user with that username'});
 
