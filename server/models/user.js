@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema
     type: String,
     default : null
   },
-  IsConfirmed : {
+  isConfirmed : {
     type : Boolean,
     default : false
   }
