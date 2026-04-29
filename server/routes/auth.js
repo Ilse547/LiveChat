@@ -5,7 +5,7 @@ const Usermodel = require('../models/user');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { VerifyToken } = require('../middleware/verifytoken');
-const { SendConfirmationEmail } = require('../service/email');
+const { SendConfirmationEmail, SendLoginEmail } = require('../service/email');
 
 
 //LOGIN LOGIC
@@ -25,6 +25,34 @@ router.post('/login',async (req, res) =>{
       return res.status(403).json({ message:'Confirm your account before login in'});
     }
 
+    const LoginCode = crypto.randomInt(100000, 999999).toString();
+    User.ConfirmationCode = LoginCode;
+    await User.save();
+
+    await SendLoginEmail(User.email, User.username, LoginCode);
+    res.status(200).json({ message: 'Code sent to your email' });
+
+
+  } catch(err){
+    console.error('There was aproblem while logging in', err);
+    res.status(500).json({message : 'There was a problem during the login process'})
+  }
+});
+
+router.post('/login/verify', async (req, res) => {
+  try{
+    const JWT_KEY = process.env.JWT_KEY;
+    const { Username, Code } = req.body;
+
+    const User = await Usermodel.findOne({ username: Username });
+    if(!User) { return res.status(401).json ({ message: 'User not found'}); }
+    if(User.ConfirmationCode != Code) {return res.status(401).json({ message: 'Wrong code :('});}
+
+
+
+    User.ConfirmationCode = null;
+    await User.save();
+
     const Payload = {
       username : User.username,
       id : User._id,
@@ -38,10 +66,11 @@ router.post('/login',async (req, res) =>{
     res.status(200).json({message : 'Login successful', token});
 
   } catch(err){
-    console.error('There was aproblem while logging in', err);
-    res.status(500).json({message : 'There was a problem during the login process'})
+    console.error('There was a proböem verfying the code ', err);
+    res.status(404).json({ message: 'There was a problem verifying the code'});
   }
 });
+
 
 //REGISTER LOGIC
 router.post('/register', async (req, res) => {
