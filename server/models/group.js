@@ -6,11 +6,13 @@ const GroupSchema = new mongoose.Schema
     type : String,
     required : true,
     minlength : 3,
-    maxlength : 10
+    maxlength : 10,
+    index: true
   },
   Participants : {
     type : [String],
-    required:true
+    required:true,
+    index: true
   }
 });
 
