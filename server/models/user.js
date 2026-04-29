@@ -31,7 +31,8 @@ const userSchema = new mongoose.Schema
   isConfirmed : {
     type : Boolean,
     default : false
-  }
+  },
+  ConfirmationCodeDate: { type: Date },
 });
 
 userSchema.pre('save', async function() {
