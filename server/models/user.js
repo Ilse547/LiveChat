@@ -21,6 +21,14 @@ const userSchema = new mongoose.Schema
     unique : true,
     lowercase : true,
     match: [/\S+@\S+\.\S+/, 'Not an email']
+  },
+  ConfirmationCode : {
+    type: String,
+    default : null
+  },
+  IsConfirmed : {
+    type : Boolean,
+    default : false
   }
 });
 
