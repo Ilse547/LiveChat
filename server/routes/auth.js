@@ -66,8 +66,6 @@ router.post('/register', async (req, res) => {
     });
     await NewUser.save();
 
-    await SendConfirmationEmail(Email, Username);
-
     await SendConfirmationEmail(Email, Username, ConfirmationCode);
 
     console.log('The user was saved to the DB');
