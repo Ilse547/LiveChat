@@ -79,7 +79,7 @@ export default {
     },
     async Confirm() {
       try {
-        const Code = document.getElementsById('CodeInput').value;
+        const Code = document.getElementById('CodeInput').value;
         const response = await fetch('/confirm', {
           method: 'POST',
           headers: { 'Content-Type' : 'application/json' },
