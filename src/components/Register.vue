@@ -51,7 +51,8 @@ export default {
         });
         if(response.ok) {
           console.log('REGISTRATION SUCCESSFUL, WROTE TO DB');
-          window.location.href = '/login'
+          localStorage.setItem('TempUsername', Username);
+          window.location.href = '/confirm'
         } else {
           const err = await response.json();
           alert(err.message || 'Registration Failed');
