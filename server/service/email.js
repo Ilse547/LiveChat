@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 
 
 
-const SendConfirmationEmail = async (ToEmail, username) => {
+const SendConfirmationEmail = async (ToEmail, username, Code) => {
 	const transporter = nodemailer.createTransport({
 	service: 'gmail',
 	auth: {
@@ -15,10 +15,12 @@ const SendConfirmationEmail = async (ToEmail, username) => {
 	await transporter.sendMail({
 		from: `"LiveChat" <${process.env.EMAIL_USER}>`,
 		to: ToEmail,
-		subject: 'Livechat confirmation email',
+		subject: 'Livechat Confirmation Email',
 		html: `
-			<h1>This si a confirmation email to ${username} </h1>
-			<p>Account created :)</p>
+			<h1>Hello, ${username} </h1>
+			<p>Your Account was created :)</p>
+			<h2 style="letter-spacing: 4px;">${Code}</h2>
+			<p>This is a confirmation code</p>
 			`
 	});
 };
