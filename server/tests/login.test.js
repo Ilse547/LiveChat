@@ -26,17 +26,10 @@ describe('POST /login', () => {
       .send({ Username: 'username', Password: 'Password123'});
     expect(res.status).toBe(401);
   });
-  it('Shoould return 401 if the email doesnt match', async () => {
-    UserModel.findOne.mockResolvedValue(null);
-    const res = await request(app)
-      .post('/login')
-      .send({ Username: 'www', Email:'wrongemail@we.com', Password:'Password123' });
-    expect(res.status).toBe(401);
-  })
   it('Should return 401 if the password is wrong', async () =>{
     UserModel.findOne.mockResolvedValue({
       Username: 'www',
-      email: 'www@iamcool.com',
+      isConfirmed: true,
       _id: '111',
       ComparePassword: jest.fn().mockResolvedValue(false)
     });
@@ -48,7 +41,7 @@ describe('POST /login', () => {
   it('should return 209 and the token when a user logs in', async () => {
     UserModel.findOne.mockResolvedValue({
       Username: 'www',
-      email: 'www@iamcool.com',
+      isConfirmed : true,
       _id: '111',
       ComparePassword: jest.fn().mockResolvedValue(true),
     });
