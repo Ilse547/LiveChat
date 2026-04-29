@@ -1,50 +1,47 @@
 //nodemailer
 const nodemailer = require('nodemailer');
 
+const SendEMail = async (to, subject, html) => {
+	const transporter = nodemailer.createTransport({
+		service: 'gmail',
+		auth:{
+			user: process.env.EMAIL_USER,
+			pass: process.env.EMAIL_PASS
+		}
+	});
+	await transporter.sendMail({
+		from: `"LiveChat" <${process.env.EMAIL_USER}>`,
+		to,
+		subject,
+		html
+	});
+};
 
 
 const SendConfirmationEmail = async (ToEmail, username, Code) => {
-	const transporter = nodemailer.createTransport({
-	service: 'gmail',
-	auth: {
-		user: process.env.EMAIL_USER,
-		pass: process.env.EMAIL_PASS
-		}
-	});
-
-	await transporter.sendMail({
-		from: `"LiveChat" <${process.env.EMAIL_USER}>`,
-		to: ToEmail,
-		subject: 'Livechat Confirmation Email',
-		html: `
+	await sendMail({
+		ToEmail,
+		'Livechat Confirmation Email',
+		`
 			<h1>Hello, ${username} </h1>
 			<p>Your Account was created :)</p>
 			<h2 style="letter-spacing: 4px;">${Code}</h2>
 			<p>This is a confirmation code</p>
-			`
+		`
 	});
 };
 
 const SendLoginEmail = async (ToEmail, username, Code) => {
-	const transporter = nodemailer.createTransport({
-	service: 'gmail',
-	auth: {
-		user: process.env.EMAIL_USER,
-		pass: process.env.EMAIL_PASS
-		}
-	});
-
 	await transporter.sendMail({
-		from: `"LiveChat" <${process.env.EMAIL_USER}>`,
-		to: ToEmail,
-		subject: 'Livechat Login Code',
-		html: `
+		ToEmail,
+		'Livechat Login Code',
+		`
 			<h1>Hello, ${username} </h1>
 			<p>This is the Login Code</p>
 			<h2 style="letter-spacing: 4px;">${Code}</h2>
 			<p>Have fun :)</p>
-			`
-	})
-}
+		`
+	});
+};
 
 module.exports = { SendConfirmationEmail, SendLoginEmail };
