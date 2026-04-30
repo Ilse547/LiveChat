@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema
   },
   ConfirmationCodeDate: { type: Date },
   LastOnline: {
-    type: Date
+    type: Date,
     default: Date.now,
     index: { expireAfterSeconds: 60*60*24*365 }
   }
