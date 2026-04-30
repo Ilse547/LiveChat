@@ -51,6 +51,7 @@ router.post('/login/verify', async (req, res) => {
 
 
     User.ConfirmationCode = null;
+    User.LastOnline = new Date();
     await User.save();
 
     const Payload = {
