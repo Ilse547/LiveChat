@@ -38,7 +38,8 @@ const SendLoginEmail = async (ToEmail, username, Code) => {
 		`
 			<h1>Hello, ${username} </h1>
 			<p>This is the Login Code</p>
-			<h2 style="letter-spacing: 4px;">${Code}</h2>
+			<h2 style="letter-spacing: 4px; color:red;">${Code}</h2>
+			<p> This code is valid for <strong>10 minutes</strong></p>
 			<p>Have fun :)</p>
 		`
 	);
