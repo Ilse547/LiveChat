@@ -30,7 +30,7 @@ const gun = Gun({
   web : server,
   file: 'data',
   peers : [
-    'https://livechat-qx1k.onrender.com/gun',
+    `${process.env.APP_URL}/gun`,
   ]
 });
 
@@ -47,7 +47,7 @@ app.use(helmet({
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-eval'"],
-      connectSrc: ["'self'", "https://livechat-qx1k.onrender.com", "wss://livechat-qx1k.onrender.com"],
+      connectSrc: ["'self'", process.env.APP_URL, process.env.APP_URL.replace('https', 'wss'),],
       styleSrc: ["'self'", "'unsafe-inline'"],
       imgSrc: ["'self'", "data:"],
     }
@@ -67,7 +67,7 @@ app.use(PageRoutes);
   
 if(require.main == module) {
   server.listen(PORT, '0.0.0.0',  () =>{
-    console.log(`server runnin on http://localhost:${PORT}`);
+    console.log(`server runnin on ${process.env.APP_URL}:${PORT}`);
   });
 }
 module.exports=app
