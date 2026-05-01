@@ -10,3 +10,14 @@ test.describe('Registration', () => {
     await expect(page.locator('h2')).toHaveText('Confirm your account');
   });
 });
+
+test.describe('Login', () => {
+  test('should show an error when inputing wrong credentials', async ({ page }) => {
+    await page.goto('/login');
+    await page.fill('input[placeholder="Input your username"]', 'vraoüds');
+    await page.fill('input[placeholder="Input your password"]', 'jsjispie');
+    await page.click('button:has-text("Login")');
+    await expect(page).toHaveURL('/login');
+  });
+});
+
