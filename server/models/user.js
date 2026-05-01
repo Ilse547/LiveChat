@@ -37,6 +37,10 @@ const userSchema = new mongoose.Schema
     type: Date,
     default: Date.now,
     index: { expireAfterSeconds: 60*60*24*365 }
+  },
+  isAdmin: {
+    type:Boolean,
+    default: false
   }
 });
 
