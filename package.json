@@ -7,10 +7,12 @@
     "build": "webpack",
     "dev": "webpack --watch",
     "start": "node server/app.js",
-    "dev-server": "npm run build && npm start"
+    "dev-server": "npm run build && npm start",
+    "test:e2e": "npx playwright test"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": ["/server/tests/e2e/"]
   },
   "keywords": [],
   "author": "",
@@ -28,6 +30,7 @@
     "vue": "^3.5.29"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@vue/compiler-sfc": "^3.5.29",
     "copy-webpack-plugin": "^14.0.0",
     "css-loader": "^7.1.4",
