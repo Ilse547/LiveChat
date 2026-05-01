@@ -27,6 +27,7 @@ router.post('/login',async (req, res) =>{
 
     const LoginCode = crypto.randomInt(100000, 999999).toString();
     User.ConfirmationCode = LoginCode;
+    User.ConfirmationCodeDate = new Date();
     await User.save();
 
     await SendLoginEmail(User.email, User.username, LoginCode);
@@ -48,7 +49,13 @@ router.post('/login/verify', async (req, res) => {
     if(!User) { return res.status(401).json ({ message: 'User not found'}); }
     if(User.ConfirmationCode != Code) {return res.status(401).json({ message: 'Wrong code :('});}
 
-
+    const CodeAge = Date.now() - new Date(User.ConfirmationCodeDate).getTime();
+    if(CodeAge > 10*60*1000) {
+      User.ConfirmationCode = null;
+      User.ConfirmationCodeDate = null;
+      await User.save();
+      return res.status(401).json({ message: 'the code has expired'});
+    }
 
     User.ConfirmationCode = null;
     User.LastOnline = new Date();
