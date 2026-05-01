@@ -21,7 +21,8 @@ After cloning:
 To make sure everything is installed :``` npm install ```  
 To build the project: ``` npm run build ```  
 To run the project: ``` npm start ``` or ``` node /server/app.js ```  
-To run the tests: `````npm test ```
+To run the tests: ```npm test ```
+To run the E2E tests: ```npm run test:e2e ``` while already running a server
 
 
 # Environmental variables:
