@@ -13,7 +13,7 @@ const { RateLimiter, AuthRateLimiter } = require('./middleware/ratelimiter')
 const { logger } = require('./middleware/logger');
 const { VerifyToken } = require('./middleware/verifytoken');
 const GroupModel = require('./models/group')
-const { ErrorHandler } = require('./middleware/error');
+const { ErrorHandler } = require('./middleware/errors');
 
 
 //ROUTES
