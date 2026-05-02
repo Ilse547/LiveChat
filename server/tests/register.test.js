@@ -26,7 +26,7 @@ describe('POST /register', () => {
       .post('/register')
       .send({Username : 'www',Email:'www@iamcool.com', Password : 'Password123' });
     expect(res.status).toBe(400);
-    expect(res.body.message).toBe('This Username is already taken');
+    expect(res.body.error).toEqual({ code: 'auth.user.already.used', message: 'Username already taken' });
   });
   it('Should return 400 if email is already used', async () => {
     UserModel.findOne
@@ -36,7 +36,7 @@ describe('POST /register', () => {
       .post('/register')
       .send({ Username: 'User', Email: 'www@iamcool.com', Password: 'Password123' });
     expect(res.status).toBe(400);
-    expect(res.body.message).toBe('Email is already in use');
+    expect(res.body.error).toEqual({ code: 'auth.email.already.used', message: 'Email already taken' });
   })
 
   it('should return 200 when registering a new user', async() => {
