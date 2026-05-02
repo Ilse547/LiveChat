@@ -99,34 +99,23 @@ router.post('/register', AsyncHandler(async (req, res) => {
 }));
 
 
-router.post('/confirm', async (req, res) => {
+router.post('/confirm', AsyncHandler(async (req, res) => {
   const { Username, Code } = req.body;
 
-  try {
     const User = await Usermodel.findOne({ username: Username });
 
-    if(!User) {
-      return res.status(400).json({ message: 'User not found' });
-    }
+    if(!User) throw new ResponseError('User not found', 401, 'auth.user.not.found');
 
-    if(User.isConfirmed) {
-      return res.status(400).json({ message : 'Account already confirmed' });
-    }
+    if(User.isConfirmed) throw new ResponseError('Acount already confirmed', 400, 'auth.user.already.confirmed');
 
-    if(User.ConfirmationCode !== Code) {
-      return res.status(400).json({ message: 'Invalid confirmation code' });
-    }
+    if(User.ConfirmationCode !== Code) throw new ResponseError('Code doesnt match the one we sent', 400, 'auth.code.not.valid');
 
     User.isConfirmed = true;
     User.ConfirmationCode = null;
     await User.save();
 
     res.status(200).json({ message : 'Account confirmed, you can log in now'})
-  } catch(err) {
-    console.error('Error confirming account', err);
-    res.status(500).json({ error : 'There was an error confirming the account'});
-  }
-});
+}));
 
 
 router.get('/verify', VerifyToken, (req, res) => {
