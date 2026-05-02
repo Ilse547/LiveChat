@@ -20,32 +20,32 @@ describe('VerifyToken Middleware', () => {
     VerifyToken(req, res, next);
   });
 
-  it('should return 403 when no authorization header is provided', () => {
+  it('should return 401 when no authorization header is provided', () => {
     const req = httpMocks.createRequest();
     const res = httpMocks.createResponse();
     const next = jest.fn();
     VerifyToken(req, res, next);
-    expect(res.statusCode).toBe(403);
-    expect(res._getJSONData()).toEqual({ message: 'token not provided ???' });
+    expect(res.statusCode).toBe(401);
+    expect(res._getJSONData().error.code).toBe('auth.token.missing');
     expect(next).not.toHaveBeenCalled();
   });
 
-  it('should return 403 when an invalid token is provided', (done) => {
+  it('should return 401 when an invalid token is provided', (done) => {
     const req = httpMocks.createRequest({
       headers: { authorization: 'Bearer invalidtoken123' }
     });
     const res = httpMocks.createResponse();
     const next = jest.fn();
     res.json = jest.fn((data) => {
-      expect(res.statusCode).toBe(403);
-      expect(data).toEqual({ message: 'Invalid token' });
+      expect(res.statusCode).toBe(401);
+      expect(data.error.code).toBe('auth.token.invalid');
       expect(next).not.toHaveBeenCalled();
       done();
     });
     VerifyToken(req, res, next);
   });
 
-  it('should return 403 when an expired token is provided', (done) => {
+  it('should return 401 when an expired token is provided', (done) => {
     const token = jwt.sign(
       { id: 1, username: 'alice' },
       process.env.JWT_KEY,
@@ -57,8 +57,8 @@ describe('VerifyToken Middleware', () => {
     const res = httpMocks.createResponse();
     const next = jest.fn();
     res.json = jest.fn((data) => {
-      expect(res.statusCode).toBe(403);
-      expect(data).toEqual({ message: 'Invalid token' });
+      expect(res.statusCode).toBe(401);
+      expect(data.error.code).toBe('auth.token.invalid');
       expect(next).not.toHaveBeenCalled();
       done();
     });
