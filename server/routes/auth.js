@@ -149,4 +149,52 @@ router.get('/verify', VerifyToken, (req, res) => {
   res.status(200).json({ message : 'Your Token is invalid', user: req.user });
 });
 
+
+router.post('/reset-password', async (req, res) => {
+  try {
+    const { Username } = req.body;
+    const User = await Usermodel.findOne({ username: Username });
+    if(!User) return res.status(404).json({ message: 'User not found' });
+
+    const ResetCode = crypto.randomInt(100000, 999999).toString();
+    User.ConfirmationCode = ResetCode;
+    User.ConfirmationCodeDate = new Date();
+    await User.save();
+
+    await SendPasswordResetEmail(User.email, User.username, ResetCode);
+    res.status(200).json({ message: 'reset code sent to your email'});
+  }catch (err) {
+    console.error('Error sending code', err);
+    res.status(500).json({ message: 'Error sending reset code'});
+  }
+});
+
+router.post('/reset-password/verify', async (req,res) => {
+  try {  
+    const {Username, Code, NewPassword } = req.body;
+    const User = await Usermodel.findOne({ username: Username });
+    if(!User) return res.status(404).json({ message: 'User not found' });
+
+    if(User.ConfirmationCode !==  Code) return res.status(404).json({message: 'Not the right code'});
+    const CodeAge = Date.now() - new Date(User.ConfirmationCodeDate).getTime();
+    if( CodeAge > 10*60*1000) {
+      User.ConfirmationCode = null;
+      User.ConfirmationCodeDate = null;
+      await User.save();
+      return res.status(401).json({ message: 'The code has expired ' });
+    }
+
+    if(!NewPassword || NewPassword.length < 8) return res.status(400).json({ message: 'Password must be at least 8 characters long'});
+
+    User.password = NewPassword;
+    User.ConfirmationCode = null;
+    User.ConfirmationCodeDate = null;
+    await User.save();
+    res.status(200).json({ message: 'Your pssword was reset'});
+  } catch(err) {
+    console.error('Error while resetting the password', err);
+    res.status(500).json({ message: 'there was an error resetting the password'});
+  }
+})
+
 module.exports = router;
