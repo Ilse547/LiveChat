@@ -138,32 +138,30 @@ router.post('/reset-password', AsyncHandler(async (req, res) => {
     res.status(200).json({ message: 'reset code sent to your email'});
 }));
 
-router.post('/reset-password/verify', async (req,res) => {
-  try {  
+router.post('/reset-password/verify', AsyncHandler(async (req,res) => {
     const {Username, Code, NewPassword } = req.body;
     const User = await Usermodel.findOne({ username: Username });
-    if(!User) return res.status(404).json({ message: 'User not found' });
+    if(!User) throw new ResponseError('User not found', 404, 'auth.user.not.found');
 
-    if(User.ConfirmationCode !==  Code) return res.status(404).json({message: 'Not the right code'});
+
+    if(User.ConfirmationCode !==  Code) throw new ResponseError('Code doesnt match the one we sent', 400, 'auth.code.not.valid');
+
+
     const CodeAge = Date.now() - new Date(User.ConfirmationCodeDate).getTime();
     if( CodeAge > 10*60*1000) {
       User.ConfirmationCode = null;
       User.ConfirmationCodeDate = null;
       await User.save();
-      return res.status(401).json({ message: 'The code has expired ' });
+      throw new ResponseError('the code has expired', 401, 'auth.code.expired');
     }
 
-    if(!NewPassword || NewPassword.length < 8) return res.status(400).json({ message: 'Password must be at least 8 characters long'});
+    if(!NewPassword || NewPassword.length < 8) throw new ResponseError('Password must be at least 8 characters long', 401, 'auth.new.password.too.short');
 
     User.password = NewPassword;
     User.ConfirmationCode = null;
     User.ConfirmationCodeDate = null;
     await User.save();
     res.status(200).json({ message: 'Your pssword was reset'});
-  } catch(err) {
-    console.error('Error while resetting the password', err);
-    res.status(500).json({ message: 'there was an error resetting the password'});
-  }
-})
+}));
 
 module.exports = router;
