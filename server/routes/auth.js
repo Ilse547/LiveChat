@@ -5,7 +5,7 @@ const Usermodel = require('../models/user');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { VerifyToken } = require('../middleware/verifytoken');
-const { SendConfirmationEmail, SendLoginEmail } = require('../service/email');
+const { SendConfirmationEmail, SendLoginEmail, SendPasswordResetEmail } = require('../service/email');
 
 
 //LOGIN LOGIC
@@ -141,12 +141,12 @@ router.post('/confirm', async (req, res) => {
     console.error('Error confirming account', err);
     res.status(500).json({ error : 'There was an error confirming the account'});
   }
-})
+});
 
 
 router.get('/verify', VerifyToken, (req, res) => {
   console.log('req.user:', req.user); 
   res.status(200).json({ message : 'Your Token is invalid', user: req.user });
-})
+});
 
 module.exports = router;
