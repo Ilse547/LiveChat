@@ -22,37 +22,24 @@ const { AsyncHandler } = require('../middleware/async')
     await newGroup.save();
     res.status(201).json({ message: "Group was successfully created" });
 
-  }));
+}));
 
 // fetch groups
-router.get('/groups', VerifyToken, async (req, res) => {
-  try {
-    const groups = await GroupModel.find({
-      Participants: req.user.username
-    });
-    res.status(200).json({ groups });
-  } catch(err) {
-    console.error('problem while fetching groups ', err);
-    res.status(400).json({ message: 'problem while fethcing groups'});
-  }
-});
+router.get('/groups', VerifyToken, AsyncHandler(async (req, res) => {
+  const groups = await GroupModel.find({
+    Participants: req.user.username
+  });
+  res.status(200).json({ groups });
+}));
 
 
 //group infos
-router.get('/groupinfo/:groupname', VerifyToken, async (req, res) => {
-  try {
+router.get('/groupinfo/:groupname', VerifyToken, AsyncHandler(async (req, res) => {
     const group = await GroupModel.findOne({ GroupName: req.params.groupname });
-    if (!group) {
-      return res.status(404).json({ message: 'Group not found' });
-    }
-    if (!group.Participants.includes(req.user.username)) {
-      return res.status(402).json({ message: 'Your are not part of this group' });
-    }
+    if (!group) return throw new ResponseError('No groups were found', 404, 'group.not.found');
+
+    if (!group.Participants.includes(req.user.username)) return throw new ResponseError('Yoou are not a group participant', 401, 'group.user.not.participant');
     res.status(200).json({ group });
-  } catch(err) {
-    console.error('Problem etting group info', err);
-    res.status(500).json({ message: 'Error getting group info'});
-  }
-});
+}));
 
 module.exports = router;
