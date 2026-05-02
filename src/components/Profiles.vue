@@ -42,7 +42,7 @@
 
         if(!token) { window.location.href = '/login'; return;}
         try{
-          const response = await fetch('/verify', {
+          const response = await fetch('/me', {
             headers:{
               Authorization: `Bearer ${token}`
             }
@@ -51,6 +51,7 @@
           const data = await response.json();
           this.email = data.user.email || '';
           this.admin = data.user.admin;
+          this.username = data.user.username;
         } catch (err) {
           console.error('Error verifying token', err);
         }
