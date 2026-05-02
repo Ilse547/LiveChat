@@ -164,4 +164,22 @@ router.post('/reset-password/verify', AsyncHandler(async (req,res) => {
     res.status(200).json({ message: 'Your pssword was reset'});
 }));
 
+router.get('/me', VerifyToken, AsyncHandler(async(req, res) => {
+  const user = await Usermodel
+    .findById(req.user.id)
+    .select('username email isAdmin LastOnline');
+  if(!User) throw new ResponseError('User not found', 404, 'auth.user.not.found');
+
+  res.status(200).json({
+    user: {
+      id: user._id.toString(),
+      username: user.username,
+      email: user.email,
+      admin: user.isAdmin,
+      lastOnline: user.LastOnline
+    }
+  });
+}));
+
+
 module.exports = router;
