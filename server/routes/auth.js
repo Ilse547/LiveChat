@@ -120,15 +120,14 @@ router.post('/confirm', AsyncHandler(async (req, res) => {
 
 router.get('/verify', VerifyToken, (req, res) => {
   console.log('req.user:', req.user); 
-  res.status(200).json({ message : 'Your Token is invalid', user: req.user });
+  res.status(200).json({ message : 'Your Token is valid', user: req.user });
 });
 
 
-router.post('/reset-password', async (req, res) => {
-  try {
+router.post('/reset-password', AsyncHandler(async (req, res) => {
     const { Username } = req.body;
     const User = await Usermodel.findOne({ username: Username });
-    if(!User) return res.status(404).json({ message: 'User not found' });
+    if(!User) throw new ResponseError('User not found', 404, 'auth.user.not.found');
 
     const ResetCode = crypto.randomInt(100000, 999999).toString();
     User.ConfirmationCode = ResetCode;
@@ -137,11 +136,7 @@ router.post('/reset-password', async (req, res) => {
 
     await SendPasswordResetEmail(User.email, User.username, ResetCode);
     res.status(200).json({ message: 'reset code sent to your email'});
-  }catch (err) {
-    console.error('Error sending code', err);
-    res.status(500).json({ message: 'Error sending reset code'});
-  }
-});
+}));
 
 router.post('/reset-password/verify', async (req,res) => {
   try {  
