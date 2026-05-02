@@ -1,32 +1,28 @@
-//Group routes
-
 const express = require('express');
 const router = express.Router();
 const GroupModel = require('../models/group');
 const { VerifyToken } = require('../middleware/verifytoken');
+const { ResponseError } = require('../middleware/responseerror');
+const { AsyncHandler } = require('../middleware/async')
 
-//Create group
-router.post('/creategroup', VerifyToken, async (req, res) =>{
-  const { GroupName, Participants } = req.body;
-  if (!GroupName) { return res.status(400).json({message: "No gorup name was given"}); }
+  router.post('/creategroup', VerifyToken, AsyncHandler(async (req, res) =>{
+    const { GroupName, Participants } = req.body;
+    if (!GroupName) throw new ResponseError('Group needs a name', 401, 'group.name.missing');
 
-  if (!Participants || Participants.length===0) { return res.status(400).json({message:" Group must have at least 2 members"}); }
+    if (!Participants || Participants.length===0) throw new ResponseError('Group must have at least 2 members', 401, 'group.not.enough.participants');
 
-  try {
     const ExistingGroup = await GroupModel.findOne({ GroupName });
-    if (ExistingGroup) { return res.status(400).json({ message : "the chosen name already exists" }); }
+    if (ExistingGroup) throw new ResponseError('Group name already taken', 400, 'group.name.already.taken');
+
     const newGroup = new GroupModel({ 
       GroupName,
       Participants: [...Participants, req.user.username]
     });
+
     await newGroup.save();
     res.status(201).json({ message: "Group was successfully created" });
-  } catch(err){
-    console.error('there was an error while creating the group', err);
-    res.status(500).json({ message: "There was a problem creating the group"});
-  };
 
-});
+  }));
 
 // fetch groups
 router.get('/groups', VerifyToken, async (req, res) => {
