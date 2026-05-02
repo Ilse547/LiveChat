@@ -6,24 +6,23 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { VerifyToken } = require('../middleware/verifytoken');
 const { SendConfirmationEmail, SendLoginEmail, SendPasswordResetEmail } = require('../service/email');
+const { ResponseError } = require('../middleware/responseerror');
+const { AsyncHandler } = require('../middleware/async')
 
 
 //LOGIN LOGIC
 
 router.post('/login',async (req, res) =>{
-  try{
     const JWT_KEY = process.env.JWT_KEY;
     const {Username, Password} = req.body;
     const User = await Usermodel.findOne({username: Username});  
 
-    if(!User) return res.status(401).json({message : 'There Is no user with that username'});
+    if (!User) throw new ResponseError('No user was found with that username', 401, 'auth.user.not.found');
 
     const IsValidPassword = await User.ComparePassword(Password);
-    if(!IsValidPassword) return res.status(401).json({message : 'Password and Username combination not found'});
+    if (!IsValidPassword) throw new ResponseError('Password and Username combination not found', 401, 'auth.invalid.credentials');
 
-    if (!User.isConfirmed) {
-      return res.status(403).json({ message:'Confirm your account before login in'});
-    }
+    if (!User.isConfirmed) throw new ResponseError('Confirm your account before logging in', 403, 'auth.not.confirmed');
 
     const LoginCode = crypto.randomInt(100000, 999999).toString();
     User.ConfirmationCode = LoginCode;
@@ -32,29 +31,25 @@ router.post('/login',async (req, res) =>{
 
     await SendLoginEmail(User.email, User.username, LoginCode);
     res.status(200).json({ message: 'Code sent to your email' });
+  });
 
+router.post('/login/verify', AsyncHandler(async (req, res) => {
 
-  } catch(err){
-    console.error('There was aproblem while logging in', err);
-    res.status(500).json({message : 'There was a problem during the login process'})
-  }
-});
-
-router.post('/login/verify', async (req, res) => {
-  try{
     const JWT_KEY = process.env.JWT_KEY;
     const { Username, Code } = req.body;
 
     const User = await Usermodel.findOne({ username: Username });
-    if(!User) { return res.status(401).json ({ message: 'User not found'}); }
-    if(User.ConfirmationCode != Code) {return res.status(401).json({ message: 'Wrong code :('});}
+
+    if (!User) throw new ResponseError('User not found', 401, 'auth.user.not.found');
+
+    if (User.ConfirmationCode != Code) throw new ResponseError('Wrong code :(', 401, 'auth.code.not.valid');
 
     const CodeAge = Date.now() - new Date(User.ConfirmationCodeDate).getTime();
     if(CodeAge > 10*60*1000) {
       User.ConfirmationCode = null;
       User.ConfirmationCodeDate = null;
       await User.save();
-      return res.status(401).json({ message: 'the code has expired'});
+      throw new ResponseError('the code has expired', 401, 'auth.code.expired');
     }
 
     User.ConfirmationCode = null;
@@ -72,12 +67,7 @@ router.post('/login/verify', async (req, res) => {
 
     console.log(`The user: ${User.username} logged in`);
     res.status(200).json({message : 'Login successful', token});
-
-  } catch(err){
-    console.error('There was a proböem verfying the code ', err);
-    res.status(404).json({ message: 'There was a problem verifying the code'});
-  }
-});
+}));
 
 
 //REGISTER LOGIC
