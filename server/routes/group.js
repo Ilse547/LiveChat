@@ -36,9 +36,9 @@ router.get('/groups', VerifyToken, AsyncHandler(async (req, res) => {
 //group infos
 router.get('/groupinfo/:groupname', VerifyToken, AsyncHandler(async (req, res) => {
     const group = await GroupModel.findOne({ GroupName: req.params.groupname });
-    if (!group) return throw new ResponseError('No groups were found', 404, 'group.not.found');
+    if (!group) throw new ResponseError('No groups were found', 404, 'group.not.found');
 
-    if (!group.Participants.includes(req.user.username)) return throw new ResponseError('Yoou are not a group participant', 401, 'group.user.not.participant');
+    if (!group.Participants.includes(req.user.username)) throw new ResponseError('Yoou are not a group participant', 401, 'group.user.not.participant');
     res.status(200).json({ group });
 }));
 
