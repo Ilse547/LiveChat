@@ -8,10 +8,13 @@ const Gun = require('gun');
 const http = require('http');
 const helmet = require('helmet');
 
+
 const { RateLimiter, AuthRateLimiter } = require('./middleware/ratelimiter')
 const { logger } = require('./middleware/logger');
 const { VerifyToken } = require('./middleware/verifytoken');
 const GroupModel = require('./models/group')
+const { ErrorHandler } = require('./middleware/error');
+
 
 //ROUTES
 const AuthRoutes = require('./routes/auth');
@@ -64,6 +67,8 @@ app.use('/register', AuthRateLimiter);
 app.use(AuthRoutes);
 app.use(GroupRoutes);
 app.use(PageRoutes);
+
+app.use(ErrorHandler);
   
 if(require.main == module) {
   server.listen(PORT, '0.0.0.0',  () =>{
