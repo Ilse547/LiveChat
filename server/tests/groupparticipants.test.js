@@ -41,7 +41,7 @@ describe('GET /groupinfo/:groupname', () => {
 		expect(res.body.group.GroupName).toBe('testgroup');
 	});
 
-	it('should return 402 if a user is not a prticipant', async () => {
+	it('should return 401 if a user is not a prticipant', async () => {
 		GroupModel.findOne.mockResolvedValue({
 			GroupName:'testgroup',
 			Participants: ['Bob', 'John', 'William']
@@ -50,8 +50,9 @@ describe('GET /groupinfo/:groupname', () => {
 		const res = await request(app)
 			.get('/groupinfo/testgroup')
 			.set('Authorization', `Bearer ${token}`);
-		expect(res.status).toBe(402);
-		expect(res.body.message).toBe('Your are not part of this group');
+		expect(res.status).toBe(401);
+		expect(res.body.error.code).toBe('group.user.not.participant');
+		expect(res.body.error.message).toBeTruthy();
 	});
 
 	
