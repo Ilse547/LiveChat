@@ -26,6 +26,11 @@ test.describe('Login', () => {
     await page.click('button:has-text("Login")');
     await expect(page.locator('h2')).toHaveText('Verification')
   });
-
+  test.describe('Chat Page', () => {
+    test('redirect to login if no token is provided', async ({ page }) => {
+      await page.goto('/chat');
+      await expect(page).toHaveURL('/login');
+    });
+  });
 });
 
