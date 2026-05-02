@@ -59,7 +59,7 @@ router.post('/login/verify', AsyncHandler(async (req, res) => {
     const Payload = {
       username : User.username,
       id : User._id,
-      admin: User.admin
+      admin: User.isAdmin
     };
 
     const token = jwt.sign(Payload, JWT_KEY, {expiresIn: '12h'});
