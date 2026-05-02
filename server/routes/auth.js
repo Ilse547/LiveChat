@@ -12,7 +12,7 @@ const { AsyncHandler } = require('../middleware/async')
 
 //LOGIN LOGIC
 
-router.post('/login',async (req, res) =>{
+router.post('/login',AsyncHandler(async (req, res) =>{
     const JWT_KEY = process.env.JWT_KEY;
     const {Username, Password} = req.body;
     const User = await Usermodel.findOne({username: Username});  
@@ -31,7 +31,7 @@ router.post('/login',async (req, res) =>{
 
     await SendLoginEmail(User.email, User.username, LoginCode);
     res.status(200).json({ message: 'Code sent to your email' });
-  });
+  }));
 
 router.post('/login/verify', AsyncHandler(async (req, res) => {
 
@@ -71,16 +71,15 @@ router.post('/login/verify', AsyncHandler(async (req, res) => {
 
 
 //REGISTER LOGIC
-router.post('/register', async (req, res) => {
+router.post('/register', AsyncHandler(async (req, res) => {
 
   const {Username, Password, Email} = req.body;
-  try {
 
     const ExistingUsername = await Usermodel.findOne({username : Username});
-    if(ExistingUsername) {return res.status(400).json({message : 'This Username is already taken'});}
+    if(ExistingUsername) throw new ResponseError('Username already taken', 400, 'auth.user.already.used');
 
     const ExistingEmail = await Usermodel.findOne({ email: Email });
-    if(ExistingEmail) { return res.status(400).json({message : 'Email is already in use'});}
+    if(ExistingEmail) throw new ResponseError('Email already taken', 400, 'auth.email.already.used');
 
     const ConfirmationCode = crypto.randomInt(100000, 999999).toString();
 
@@ -97,11 +96,7 @@ router.post('/register', async (req, res) => {
 
     console.log('The user was saved to the DB');
     res.status(200).json({message : 'Worked'})
-  }catch(err){
-    console.log('error while saving suer to db', err)
-    res.status(400).json({error: "There was an error creating the user"});
-  }
-});
+}));
 
 
 router.post('/confirm', async (req, res) => {
