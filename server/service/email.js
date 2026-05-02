@@ -59,4 +59,4 @@ const SendPasswordResetEmail = async (ToEmail, username, Code) => {
 		`
 	);
 };
-module.exports = { SendConfirmationEmail, SendLoginEmail };
+module.exports = { SendConfirmationEmail, SendLoginEmail, SendPasswordResetEmail };
