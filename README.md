@@ -83,6 +83,7 @@ Project uses 2 NoSQL Databases:
 
 ![Database](pictures/DB.png)
 
+
 ---
 ## SE_08: Clean Code
 
@@ -131,16 +132,9 @@ Unit tests:
 1. VerifyToken tests
 
 End-to-End tests:
-1. not right mow
+1. E2E for the login form
 
 ---
-## SE_45: Web Frontend Technologies
-
----
-## SE_46: Web Backend Technologies
-
----
-
 # file structure:
 
 Livechat/  
