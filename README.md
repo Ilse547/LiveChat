@@ -34,6 +34,9 @@ In the .env file you should have:
 - ``` EMAIL_USER = ...``` -> The email adress
 
 
+# Deployment:
+this project is deployed at https://livechat-qx1k.onrender.com/  
+it uses [render](https://render.com/)  
 
 ## Authentication & Credentials:
 The app requires an email for the verification codes
@@ -68,12 +71,17 @@ Automatic tests:
 ### Testing:
 The project uses the jest and supertest libraries to run tests  
 
+## Architecture diagram:
+![Architecture](pictures/diagram.png)
+
 ---
 # Modules:
 ## SE_06(No SQL Databases):
 Project uses 2 NoSQL Databases:  
 1. GUNjs -> messages
 2. MongoDB -> User data and Group Data
+
+![Database](pictures/DB.png)
 
 ---
 ## SE_08: Clean Code
