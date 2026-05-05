@@ -57,6 +57,7 @@ Vue3 as a frontend framework
 ### Database:
 MongoDB for stroign user data and group data
 GUNjs for the messages
+![Db](pictures/DB.png)
 
 ### Authentication:
 This project uses JWT to ...
@@ -74,15 +75,71 @@ The project uses the jest and supertest libraries to run tests
 ## Architecture diagram:
 ![Architecture](pictures/diagram.png)
 
+# Dynamic Routes:
+## authentication Routes:
+``` /login ``` -> To submit credentials   
+``` /login/verify ``` -> Verify OTP  
+``` /register ``` -> Register a new account  
+``` /confirm ``` -> Confirm a new account with OTP  
+``` /verify ``` -> Verify the JWT token  
+``` /reset-password ``` -> Reset the pasword   
+``` /reset-password/verify ``` -> Verify the OTP and write new password  
+``` /me ``` -> To get user account information  
+
+## Group routes:
+``` /creategroup ``` -> To create a group  
+``` /groups ``` -> To fecth the groups a user is part of  		
+``` /groupinfo/:groupname ``` -> To check if a user is part of the group  
+
+# file structure:
+```
+Livechat/  
+├── README.md  
+├── package.json  
+├── package-lock.json  
+├── webpack.config.js  
+├── .gitignore  
+├── .env  
+├── src/  
+│   ├── components/  
+│   │   ├── Home.vue  
+│   │   └── *.vue  
+│   ├── pages/  
+│   │   ├── home.js  
+│   │   └── *.js files  
+│   ├── styles/  
+│   │   ├── style.css  
+│   │   └── *.css files   
+├── public/  
+│   ├── index.html  
+│   └── *.html  
+├── dist/  
+│   └── Build output  
+├── server/  
+│   ├── app.js  
+│   ├── middleware  
+│   │   ├── logger.js  
+│   │   └── *.js files    
+│   ├── models  
+│   │   ├── user.js  
+│   │   └── *.js files  
+│   ├──tests  
+│   │   ├── login.test.js  
+│   │   └── *.test.js files
+│   ├──routes  
+│   │   ├── auth.js  
+│   │   └── *.js files
+│   ├──service  
+│   │   ├── email.js  
+│   │   └── *.js files  
+```
+
 ---
 # Modules:
 ## SE_06(No SQL Databases):
 Project uses 2 NoSQL Databases:  
 1. GUNjs -> messages
 2. MongoDB -> User data and Group Data
-
-![Database](pictures/DB.png)
-
 
 ---
 ## SE_08: Clean Code
@@ -132,50 +189,6 @@ Unit tests:
 1. VerifyToken tests
 
 End-to-End tests:
-1. E2E for the login form
+1. not right mow
 
----
-# file structure:
 
-Livechat/  
-├── README.md  
-├── package.json  
-├── package-lock.json  
-├── webpack.config.js  
-├── .gitignore  
-├── .env  
-├── src/  
-│   ├── components/  
-│   │   ├── Home.vue  
-│   │   └── *.vue  
-│   ├── pages/  
-│   │   ├── home.js  
-│   │   └── *.js files  
-│   ├── styles/  
-│   │   ├── style.css  
-│   │   └── *.css files  
-│   ├── styles/  
-│   │   ├── icon.png  
-│   │   └── *.png files   
-├── public/  
-│   ├── index.html  
-│   └── *.html  
-├── dist/  
-│   └── Build output  
-├── server/  
-│   ├── app.js  
-│   ├── middleware  
-│   │   ├── logger.js  
-│   │   └── *.js files    
-│   ├── models  
-│   │   ├── user.js  
-│   │   └── *.js files  
-│   ├──tests  
-│   │   ├── login.test.js  
-│   │   └── *.test.js files
-│   ├──routes  
-│   │   ├── auth.js  
-│   │   └── *.js files
-│   ├──service  
-│   │   ├── email.js  
-│   │   └── *.js files
