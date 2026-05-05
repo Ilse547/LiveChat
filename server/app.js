@@ -13,6 +13,7 @@ const { logger } = require('./middleware/logger');
 const { VerifyToken } = require('./middleware/verifytoken');
 const GroupModel = require('./models/group')
 const { ErrorHandler } = require('./middleware/errors');
+const { sanitize } = require('./middleware/sanitize');
 
 
 //ROUTES
@@ -43,6 +44,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use(express.json({ limit: '5kb'}));
 app.use(express.urlencoded({ extended : true }));
+app.use(sanitize);
 app.use(logger);
 app.use(helmet({
   contentSecurityPolicy: {
