@@ -15,6 +15,9 @@ jest.mock('../service/email', () => ({
   SendConfirmationEmail: jest.fn().mockResolvedValue(true),
   SendLoginEmail: jest.fn().mockResolvedValue(true)
 }));
+jest.mock('express-mongo-sanitize', () => { return () => (req, res, next) => next(); });
+
+
 process.env.JWT_KEY = 'TESTKEY';
 const app = require('../app');
 const UserModel = require('../models/user');
