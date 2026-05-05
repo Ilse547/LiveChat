@@ -1,7 +1,9 @@
 
 
 # Live Chat Fullstack Webapp
-
+## Deployment:
+this project is deployed at https://livechat-qx1k.onrender.com/  
+it uses [render](https://render.com/)  
 
 ## Description: 
 Fullstack Webapp for users to be able to have a real time communication using a websocket (GUNjs), a frontend and backend framework.  
@@ -14,17 +16,6 @@ Users should be able to:
 - If they are an Admin Delete messages  
 - Users should be able to edit their messages  
 
-
-
-# How to run:
-After cloning:  
-To make sure everything is installed :``` npm install ```  
-To build the project: ``` npm run build ```  
-To run the project: ``` npm start ``` or ``` node /server/app.js ```  
-To run the tests: ```npm test ```
-To run the E2E tests: ```npm run test:e2e ``` while already running a server
-
-
 # Environmental variables:
 In the .env file you should have:  
 - ``` PORT = ...``` -> The Port the server is running on  
@@ -33,13 +24,23 @@ In the .env file you should have:
 - ``` EMAIL_PASS = ...``` -> The password for th email
 - ``` EMAIL_USER = ...``` -> The email adress
 
+# How to run:
+After cloning:
+1. To make sure everything is installed :``` npm install ```  
+2. Set the environmental variables  
+3. Build the project using: ``` npm run build ```  
+4. Start the server using : ``` npm start ``` or ``` node /server/app.js ```  
 
-# Deployment:
-this project is deployed at https://livechat-qx1k.onrender.com/  
-it uses [render](https://render.com/)  
+
+## Important commands:
+To build the project: ``` npm run build ```  
+To run the project: ``` npm start ``` or ``` node /server/app.js ```  
+To run the tests: ```npm test ```
+To run the E2E tests: ```npm run test:e2e ``` while already running a server
+
 
 ## Authentication & Credentials:
-The app requires an email for the verification codes
+The app requires an email for the verification codes:
 
 
 
@@ -55,12 +56,12 @@ Backend Routing and handling of the credentials, database conections
 Vue3 as a frontend framework
 
 ### Database:
-MongoDB for stroign user data and group data
+MongoDB for storing user data and group data
 GUNjs for the messages
 ![Db](pictures/DB.png)
 
 ### Authentication:
-This project uses JWT to ...
+This project uses JWT to allow Users to access certain pages and verify their identity  
 
 ## Convention and choices made:
 Variables:```PascalCase```
@@ -82,13 +83,13 @@ The project uses the jest and supertest libraries to run tests
 ``` /register ``` -> Register a new account  
 ``` /confirm ``` -> Confirm a new account with OTP  
 ``` /verify ``` -> Verify the JWT token  
-``` /reset-password ``` -> Reset the pasword   
+``` /reset-password ``` -> Reset the password   
 ``` /reset-password/verify ``` -> Verify the OTP and write new password  
 ``` /me ``` -> To get user account information  
 
 ## Group routes:
 ``` /creategroup ``` -> To create a group  
-``` /groups ``` -> To fecth the groups a user is part of  		
+``` /groups ``` -> To fetch the groups a user is part of  		
 ``` /groupinfo/:groupname ``` -> To check if a user is part of the group  
 
 # file structure:
@@ -148,9 +149,9 @@ Project uses 2 NoSQL Databases:
 ## SE_09(Cyber security):
 ### Threat model analysis:
 Using the `STRIDE` threat model:  
-1. Spoofin Identity  
+1. Spoofing Identity  
 An attacker could Spoof someone Identity login in as another User   
-They could Brute Force into soemones account  
+They could Brute Force into soemone's account  
 Could make up a fake JWT token  
 
 2. Tampering With Data  
@@ -177,10 +178,20 @@ If logged in they could spam messages to saturate the connection
 6. Elevation Of Privilege  
 An Attacker could access messages in other users group  
 Modify JWT token to gain admin status  
-Access protected routes without a token  
+Access protected routes without a token 
+
+## Mitigations:
+1. JWT protected endpoints  
+2. 2FA by default with a OTP sent to the email inbox ( expires after 10 min.)  
+3. Rate limiting on all authentication routes  
+4. Security headers (HelmetJS)  
+5. Input validation (express-mongo-validation) 
+6. Request body size limit 
+7. Logs
+
 ---
 ## SE_10: Automated Software Testing
-Thsi project has several tests:
+This project has several tests:
 Integration tests:  
 1. Login tests
 2. Registration tests
@@ -189,6 +200,6 @@ Unit tests:
 1. VerifyToken tests
 
 End-to-End tests:
-1. not right mow
+1. A Login test
 
 
