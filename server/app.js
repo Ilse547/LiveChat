@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const Gun = require('gun');
 const http = require('http');
 const helmet = require('helmet');
-
+const mongosanitize = require('express-mongo-sanitize');
 
 const { RateLimiter, AuthRateLimiter } = require('./middleware/ratelimiter')
 const { logger } = require('./middleware/logger');
@@ -43,6 +43,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 
 app.use(express.json({ limit: '50kb'}));
+app.use(mongosanitize());
 app.use(express.urlencoded({ extended : true }));
 app.use(logger);
 app.use(helmet({
