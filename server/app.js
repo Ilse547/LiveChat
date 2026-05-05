@@ -63,6 +63,9 @@ app.use(RateLimiter);
 
 app.use('/login', AuthRateLimiter);
 app.use('/register', AuthRateLimiter);
+app.use('/login/verify', AuthRateLimiter);
+app.use('/confirm', AuthRateLimiter);
+App.use('/reset-password/verify', AuthRateLimiter);
 
 
 app.use(AuthRoutes);
