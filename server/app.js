@@ -43,7 +43,6 @@ mongoose.connect(process.env.MONGO_URI)
 
 
 app.use(express.json({ limit: '50kb'}));
-app.use(mongosanitize());
 app.use(express.urlencoded({ extended : true }));
 app.use(logger);
 app.use(helmet({
