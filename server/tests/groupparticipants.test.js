@@ -19,7 +19,6 @@ jest.mock('mongoose', ()=> ({
 	Schema: jest.fn().mockImplementation(() => ({})),
 	model: jest.fn().mockReturnValue({})
 }));
-jest.mock('express-mongo-sanitize', () => { return () => (req, res, next) => next(); });
 
 const app = require('../app');
 const GroupModel = require('../models/group');
