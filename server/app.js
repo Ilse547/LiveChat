@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 const Gun = require('gun');
 const http = require('http');
 const helmet = require('helmet');
-const mongosanitize = require('express-mongo-sanitize');
 
 const { RateLimiter, AuthRateLimiter } = require('./middleware/ratelimiter')
 const { logger } = require('./middleware/logger');
