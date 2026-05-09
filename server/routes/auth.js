@@ -181,5 +181,12 @@ router.get('/me', VerifyToken, AsyncHandler(async(req, res) => {
   });
 }));
 
+router.get('/admin/users', VerifyToken, AsyncHandler(async (req, res) => {
+  if(!req.user.admin) throw new ResponseError('Access denied', 403, 'auth.not.admin');
+  const users = await Usermodel.finf()
+    .select('username email isAdmin LastOnline isConfirmed');
+
+  res.status(200).json({ users });
+}));
 
 module.exports = router;
