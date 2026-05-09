@@ -58,7 +58,7 @@ code {
     border-radius: 5px;
     box-sizing: border-box;
 }
-.LoginInputArea, .RegisterInputArea, .Description, .CreateGroup{
+.LoginInputArea, .RegisterInputArea, .Description, .CreateGroup, .AdminPanel{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -116,7 +116,7 @@ a:hover {
         width: 120px;
         font-size: 0.9rem;
     }
-    .LoginInputArea, .RegisterInputArea, .Description, .CreateGroup {
+    .LoginInputArea, .RegisterInputArea, .Description, .CreateGroup, .AdminPanel {
         width: 260px;
     }
 }
@@ -146,7 +146,7 @@ a:hover {
     }
     .TextInput { width: 100%; }
     
-    .LoginInputArea, .RegisterInputArea, .Description, .CreateGroup{
+    .LoginInputArea, .RegisterInputArea, .Description, .CreateGroup, .AdminPanel{
         width: 100%;
         white-space: normal;
         padding: 0.75rem;
