@@ -168,7 +168,7 @@ router.get('/me', VerifyToken, AsyncHandler(async(req, res) => {
   const user = await Usermodel
     .findById(req.user.id)
     .select('username email isAdmin LastOnline');
-  if(!User) throw new ResponseError('User not found', 404, 'auth.user.not.found');
+  if(!user) throw new ResponseError('User not found', 404, 'auth.user.not.found');
 
   res.status(200).json({
     user: {
