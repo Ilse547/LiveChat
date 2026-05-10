@@ -1,5 +1,4 @@
-    <template>
-      <title>Login Page</title>
+  <template>
     <div>
       <main>
           
