@@ -19,10 +19,11 @@
     <div v-if="admin" class="AdminPanel">
       <h2>Admin Panel</h2>
       <button class="InputButton" @click="FetchUsers">Load Users</button>
-      <div v-if="users.length > 0">
-        <div v-for="user in users" :key="user.username" class="UserList">
+      <div v-if="users.length > 0" class="UserList">
+        <div v-for="user in users" :key="user.username">
           <p>username: <strong>{{ user.username }}</strong></p>
           <p>Email: {{ user.email }}</p>
+          <hr class="NavigationBarDivider">
         </div>
       </div>
     </div>
