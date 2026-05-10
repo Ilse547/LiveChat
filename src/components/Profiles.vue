@@ -2,24 +2,24 @@
   <div class="Description">
     <h1>Hello {{ username }}</h1>
     <p>Email: {{ email }}</p>
-    <p> Admin status: {{ admin}} </p>
+    <p> Admin status: {{ admin }} </p>
 
     <div v-if="!resetRequested && !resetDone">
-      <button class="InputButton" @click="RequestReset"> reset password</button>
+      <button class="InputButton" @click="RequestReset" aria-label="Reset Password Button"> reset password</button>
     </div>
 
     <div v-if="resetRequested" class="LoginInputArea">
-      <input v-model="ResetCode" class="TextInput" type="text" placeholder="Enter code from email">
-      <input v-model="NewPassword" class="TextInput" type="password" placeholder="Enter new password">
-      <button class="InputButton" @click="ConfirmReset">Confirm reset</button>
+      <input v-model="ResetCode" class="TextInput" type="text" placeholder="Enter code from email" aria-label="One Time Password Input">
+      <input v-model="NewPassword" class="TextInput" type="password" placeholder="Enter new password" aria-label="New Password input">
+      <button class="InputButton" @click="ConfirmReset" aria-label="Reset Password">Confirm reset</button>
     </div>
     
     <p v-if="resetDone"> Password was reset</p>
 
-    <div v-if="admin" class="AdminPanel">
+    <div v-if="admin" class="AdminPanel" aria-label="Admin Panel">
       <h2>Admin Panel</h2>
-      <button class="InputButton" @click="FetchUsers">Load Users</button>
-      <div v-if="users.length > 0" class="UserList">
+      <button class="InputButton" @click="FetchUsers" aria-label="Load All Users">Load Users</button>
+      <div v-if="users.length > 0" class="UserList" aria-label="User List">
         <div v-for="user in users" :key="user.username">
           <p>username: <strong>{{ user.username }}</strong></p>
           <p>Email: {{ user.email }}</p>
@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <button class="InputButton" @click="Logout" style="background-color: #ff6b6b;"> Logout </button>
+    <button class="InputButton" @click="Logout" style="background-color: #ff6b6b;" aria-label="Log Out Button"> Logout </button>
   </div>
 </template>
 

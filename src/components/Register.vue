@@ -7,20 +7,20 @@
         <div v-if="!registered" class="RegisterInputArea">   
           <p> please Register</p>
 
-          <input id="UsernameInput" class="TextInput" type="text" placeholder="Input your username">
-          <input id="EmailInput" class="TextInput" type="text" placeholder="Input your email">
-          <input id="PasswordInput" class="TextInput" type="password" placeholder="Input your password">
+          <input id="UsernameInput" class="TextInput" type="text" placeholder="Input your username" aria-label="Username Input">
+          <input id="EmailInput" class="TextInput" type="text" placeholder="Input your email" aria-label="Email Input">
+          <input id="PasswordInput" class="TextInput" type="password" placeholder="Input your password" aria-label="Password Input">
 
 
-          <button class="InputButton" @click="Register">Register</button>
-          <button class="InputButton" id="LoginPageRedirect" @click="LoginPage">Login Page</button>
+          <button class="InputButton" @click="Register" aria-label="Register Button">Register</button>
+          <button class="InputButton" id="LoginPageRedirect" @click="LoginPage" aria-label="Login Redirect Button">Login Page</button>
         </div>
 
         <div v-if="registered" class='RegisterInputArea'>
           <h2> Confirm your account</h2>
           <p>Enter the password In the email</p>
-          <input id="CodeInput" type="text" class="TextInput" placeholder="Enter the code">
-          <button class="InputButton" @click='Confirm'> confirm </button>
+          <input id="CodeInput" type="text" class="TextInput" placeholder="Enter the code" aria-label="One Time Password Input">
+          <button class="InputButton" @click='Confirm' aria-label="One Time Password Confirmation button"> confirm </button>
         </div>
 
       </div>

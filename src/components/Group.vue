@@ -2,11 +2,11 @@
   <div class="ChatDiv">
 
 
-    <nav class="Sidebar">
+    <nav class="Sidebar"aria-label="Navigation bar">
         <p> Logged in as:</p>
-        <button @click='GoToProfile' class="InputButton" style='cursor: pointer'> {{ username }} </button>
+        <button @click='GoToProfile' class="InputButton" style='cursor: pointer' aria-label="Profiles Button"> {{ username }} </button>
         <hr class="NavigationBarDivider">
-        <button class="InputButton" @click="CreateGroup" > Create Group</button>
+        <button class="InputButton" @click="CreateGroup" aria-label="Create Group button"> Create Group</button>
         <h1>Groups:</h1>
 
         <div v-if="groups.length === 0">
@@ -27,13 +27,13 @@
       <div class="MessageDiv">
         <p v-for="message in messages" :key="message.id">
           <strong>{{ message.username }}</strong>: {{ message.text }}
-          <button v-if="message.username === username" @click="DeleteMessage(message.id)" class="DeleteMessageButton"> Del your message</button>
+          <button v-if="message.username === username" @click="DeleteMessage(message.id)" class="DeleteMessageButton" aria-label="Delete Message"> Del your message</button>
         </p>
       </div>
 
       <div class="InputArea">
-        <input v-model="NewMessage" @keyup.enter="SendMessage" type="text" class="TextInput" placeholder="Write your message here">
-        <button @click="SendMessage" class="InputButton">Send</button>
+        <input v-model="NewMessage" @keyup.enter="SendMessage" type="text" class="TextInput" placeholder="Write your message here" aria-label="Message Text Input">
+        <button @click="SendMessage" class="InputButton" aria-label="Send Message Button">Send</button>
       </div>
     </main>
   </div>

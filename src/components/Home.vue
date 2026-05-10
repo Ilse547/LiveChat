@@ -4,8 +4,8 @@
 
     <p>Join conversations by:</p>
 
-    <button id="LoginPageRedirect" @click="LoginPage" class="InputButton">Loging in</button>
-    <button id="RegisterPageRedirect" @click="RegisterPage" class="InputButton">Registering</button>
+    <button id="LoginPageRedirect" @click="LoginPage" class="InputButton" aria-label="Redirect to Login page">Loging in</button>
+    <button id="RegisterPageRedirect" @click="RegisterPage" class="InputButton" aria-label="Redirect to registration page">Registering</button>
 
     <h1>About The application</h1>
       <p>

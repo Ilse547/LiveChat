@@ -6,18 +6,18 @@
         <div v-if="!CodeSent" class="LoginInputArea">
           <p> please login</p>
 
-          <input id="UsernameInput" class="TextInput" type="text" placeholder="Input your username">
-          <input id="PasswordInput" class="TextInput" type="password" placeholder="Input your password">
-          <button class="InputButton" @click="login">Login</button>
+          <input id="UsernameInput" class="TextInput" type="text" placeholder="Input your username" aria-label="Username Input">
+          <input id="PasswordInput" class="TextInput" type="password" placeholder="Input your password" aria-label="Password Input">
+          <button class="InputButton" @click="login"aria-label="Login Button">Login</button>
 
-          <button class="InputButton" @click="RegisterPage" >RegisterPage</button>
+          <button class="InputButton" @click="RegisterPage" aria-label="Redirect to registration page">RegisterPage</button>
         </div>
 
         <div v-if="CodeSent" class='RegisterInputArea'>
           <h2>Verification</h2>
           <p>Enter the code sent to your email</p>
-          <input id="CodeInput" type="text" class="TextInput" placeholder="Enter the code">
-          <button class="InputButton" @click='VerifyCode'> confirm </button>
+          <input id="CodeInput" type="text" class="TextInput" placeholder="Enter the code" aria-label="One Time Password Input">
+          <button class="InputButton" @click='VerifyCode' aria-label="Verify Code Button"> confirm </button>
         </div>
 
 
