@@ -2,11 +2,11 @@
   <div class="ChatDiv">
 
 
-    <nav class="Sidebar">
+    <nav class="Sidebar" aria-label="Sidebar">
         <p> Logged in as:</p>
-        <button @click='GoToProfile' class="InputButton" style='cursor: pointer'> {{ username }} </button>
+        <button @click='GoToProfile' class="InputButton" style='cursor: pointer' aria-label="Profiles button"> {{ username }} </button>
         <hr class="NavigationBarDivider">
-        <button class="InputButton" @click="CreateGroup" > Create Group</button>
+        <button class="InputButton" @click="CreateGroup" aria-label="Create Group Button"> Create Group</button>
         <h1>Groups:</h1>
 
         <div v-if="groups.length === 0">
@@ -32,8 +32,8 @@
       </div>
 
       <div class="InputArea">
-        <input v-model="NewMessage" @keyup.enter="SendMessage" type="text" class="TextInput" placeholder="Write your message here">
-        <button @click="SendMessage" class="InputButton">Send</button>
+        <input v-model="NewMessage" @keyup.enter="SendMessage" type="text" class="TextInput" placeholder="Write your message here" aria-label="Message Text Input">
+        <button @click="SendMessage" class="InputButton" aria-label="Send message Button">Send</button>
       </div>
     </main>
   </div>
