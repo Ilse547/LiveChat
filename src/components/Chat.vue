@@ -24,12 +24,12 @@
     <main class="ChatMain">
       <h1>General Chat</h1>
 
-      <div class="MessageDiv">
+      <ul class="MessageDiv">
         <p v-for="message in messages" :key="message.id">
           <strong>{{ message.username }}</strong>: {{ message.text }}
           <button v-if="message.username === username" @click="DeleteMessage(message.id)" class="DeleteMessageButton" aria-label="Delete Message Button"> Delete</button>
         </p>
-      </div>
+      </ul>
 
       <div class="InputArea">
         <input v-model="NewMessage" @keyup.enter="SendMessage" type="text" class="TextInput" placeholder="Write your message here" aria-label="Message Text Input">
