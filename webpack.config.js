@@ -2,6 +2,7 @@ const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 
 module.exports = {
@@ -38,6 +39,9 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
+    new webpack.DefinePlugin({
+      __APP_URL__: JSON.stringify(process.env.APP_URL || 'http://localhost:3000')
+    }),
     new CopyWebpackPlugin({
       patterns: [
         { from: './public/favicon.ico', to: 'favicon.ico' }
