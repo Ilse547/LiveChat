@@ -163,7 +163,7 @@ router.post('/reset-password/verify', AsyncHandler(async (req,res) => {
     User.ConfirmationCode = null;
     User.ConfirmationCodeDate = null;
     await User.save();
-    res.status(200).json({ message: 'Your pssword was reset'});
+    res.status(200).json({ message: 'Your password was reset'});
 }));
 
 router.get('/me', VerifyToken, AsyncHandler(async(req, res) => {
