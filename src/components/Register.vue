@@ -34,7 +34,7 @@ export default {
   data() {
     return{
       registered: false,
-      Username: ''
+      username: ''
     }
   },
   mounted() {
