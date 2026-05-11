@@ -9,6 +9,11 @@ const { SendConfirmationEmail, SendLoginEmail, SendPasswordResetEmail } = requir
 const { ResponseError } = require('../middleware/responseerror');
 const { AsyncHandler } = require('../middleware/async')
 
+const OTP_EXPIRY_MS = 10 * 60 * 1000;
+const OTP_MIN = 100000;
+const OTP_MAX = 999999;
+
+
 
 //LOGIN LOGIC
 
@@ -24,7 +29,7 @@ router.post('/login',AsyncHandler(async (req, res) =>{
 
     if (!User.isConfirmed) throw new ResponseError('Confirm your account before logging in', 403, 'auth.not.confirmed');
 
-    const LoginCode = crypto.randomInt(100000, 999999).toString();
+    const LoginCode = crypto.randomInt(OTP_MIN, OTP_MAX).toString();
     User.ConfirmationCode = LoginCode;
     User.ConfirmationCodeDate = new Date();
     await User.save();
@@ -45,7 +50,7 @@ router.post('/login/verify', AsyncHandler(async (req, res) => {
     if (User.ConfirmationCode != Code) throw new ResponseError('Wrong code :(', 401, 'auth.code.not.valid');
 
     const CodeAge = Date.now() - new Date(User.ConfirmationCodeDate).getTime();
-    if(CodeAge > 10*60*1000) {
+    if(CodeAge > OTP_EXPIRY_MS) {
       User.ConfirmationCode = null;
       User.ConfirmationCodeDate = null;
       await User.save();
@@ -80,7 +85,7 @@ router.post('/register', AsyncHandler(async (req, res) => {
     const ExistingEmail = await Usermodel.findOne({ email: Email });
     if(ExistingEmail) throw new ResponseError('Email already taken', 400, 'auth.email.already.used');
 
-    const ConfirmationCode = crypto.randomInt(100000, 999999).toString();
+    const ConfirmationCode = crypto.randomInt(OTP_MIN, OTP_MAX).toString();
 
     const NewUser = new Usermodel ({
       username : Username,
@@ -126,7 +131,7 @@ router.post('/reset-password', AsyncHandler(async (req, res) => {
     const User = await Usermodel.findOne({ username: Username });
     if(!User) throw new ResponseError('User not found', 404, 'auth.user.not.found');
 
-    const ResetCode = crypto.randomInt(100000, 999999).toString();
+    const ResetCode = crypto.randomInt(OTP_MIN, OTP_MAX).toString();
     User.ConfirmationCode = ResetCode;
     User.ConfirmationCodeDate = new Date();
     await User.save();
@@ -145,7 +150,7 @@ router.post('/reset-password/verify', AsyncHandler(async (req,res) => {
 
 
     const CodeAge = Date.now() - new Date(User.ConfirmationCodeDate).getTime();
-    if( CodeAge > 10*60*1000) {
+    if( CodeAge > OTP_EXPIRY_MS) {
       User.ConfirmationCode = null;
       User.ConfirmationCodeDate = null;
       await User.save();
