@@ -2,6 +2,7 @@ const { ref } = require('vue');
 const Gun = require('gun');
 
 function useChat(channelKey) {
+	let activeKey = channelKey;
 	const username = ref('');
 	const groups = ref([]);
 	const messages = ref([]);
@@ -27,10 +28,11 @@ function useChat(channelKey) {
 	}
 
 
-	function initGun(AppUrl) {
+	function initGun(AppUrl, keyOverride) {
+		activeKey = keyOverride || channelKey;
 		gun = Gun({ peers: [`${AppUrl}/gun`] });
 
-		gun.get(channelKey).map().on((message) => {
+		gun.get(activeKey).map().on((message) => {
 			if(!message?.text) return;
 			const exists = messages.value.find(m => m.id === message.id);
 			if (!exists) {
@@ -48,11 +50,11 @@ function useChat(channelKey) {
 	      text: NewMessage.value,
 	      timestamp: new Date().toISOString()
 		};
-		gun.get(channelKey).get(message.id).put(message);
+		gun.get(activeKey).get(message.id).put(message);
 	    NewMessage.value = '';
 	};
 	function deleteMessage(id) {
-		gun.get(channelKey).get(id).put(null);
+		gun.get(activeKey).get(id).put(null);
 		messages.value = messages.value.filter(m => m.id !== id);
 	}
 	async function fetchGroups(){
