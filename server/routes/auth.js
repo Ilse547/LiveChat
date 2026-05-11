@@ -65,7 +65,6 @@ router.post('/login/verify', AsyncHandler(async (req, res) => {
     const token = jwt.sign(Payload, JWT_KEY, {expiresIn: '12h'});
 
 
-    console.log(`The user: ${User.username} logged in`);
     res.status(200).json({message : 'Login successful', token});
 }));
 
@@ -94,7 +93,6 @@ router.post('/register', AsyncHandler(async (req, res) => {
 
     await SendConfirmationEmail(Email, Username, ConfirmationCode);
 
-    console.log('The user was saved to the DB');
     res.status(200).json({message : 'Worked'})
 }));
 
@@ -119,7 +117,6 @@ router.post('/confirm', AsyncHandler(async (req, res) => {
 
 
 router.get('/verify', VerifyToken, (req, res) => {
-  console.log('req.user:', req.user); 
   res.status(200).json({ message : 'Your Token is valid', user: req.user });
 });
 
