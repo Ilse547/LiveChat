@@ -82,7 +82,7 @@
             if(!IsMember) return
             this.gun = Gun({
               peers : [
-                'https://livechat-qx1k.onrender.com/gun',
+                `${__APP_URL__}/gun`
               ]
             });
 
