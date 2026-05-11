@@ -42,7 +42,6 @@ router.get('/user/exists/:username', async (req, res) => {
     const user = await Usermodel.findOne({ username: req.params.username });
     res.status(200).json({ exists: !!user });
   } catch (err) {
-    console.error('error looking if user eistrs', err);
     res.status(500).json({ exists: false });
   }
 });
