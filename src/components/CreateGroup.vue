@@ -45,7 +45,7 @@ export default {
           this.verified.push(username);
           this.participants.splice(index, 1);
         } else {
-          alert(`Ùser doesnt exist`);
+          alert(`the user does not exist`);
         }
       } catch (err){
         console.error('Error while check user', err);
