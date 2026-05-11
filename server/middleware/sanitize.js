@@ -6,6 +6,9 @@ function sanitize(req, res, next) {
 }
 
 function sanitizeObject(obj) {
+	if (Array.isArray(obj)) {
+        return obj.map(sanitizeObject);
+    }
 	if (typeof obj !== 'object'|| obj === null ) return obj;
 	const clean ={};
 	for (const key of Object.keys(obj)) {
