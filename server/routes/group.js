@@ -3,7 +3,7 @@ const router = express.Router();
 const GroupModel = require('../models/group');
 const { VerifyToken } = require('../middleware/verifytoken');
 const { ResponseError } = require('../middleware/responseerror');
-const { AsyncHandler } = require('../middleware/async')
+const { AsyncHandler } = require('../middleware/async');
 
   router.post('/creategroup', VerifyToken, AsyncHandler(async (req, res) =>{
     const { GroupName, Participants } = req.body;
