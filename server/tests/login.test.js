@@ -12,8 +12,8 @@ jest.mock('mongoose', () => ({
 }));
 
 jest.mock('../service/email', () => ({
-  SendConfirmationEmail: jest.fn().mockResolvedValue(true),
-  SendLoginEmail: jest.fn().mockResolvedValue(true)
+  sendConfirmationEmail: jest.fn().mockResolvedValue(true),
+  sendLoginEmail: jest.fn().mockResolvedValue(true)
 }));
 
 
