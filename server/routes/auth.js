@@ -5,7 +5,7 @@ const Usermodel = require('../models/user');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { VerifyToken } = require('../middleware/verifytoken');
-const { sendConfirmationEmail, sendLoginEmail, SendPasswordResetEmail } = require('../service/email');
+const { sendConfirmationEmail, sendLoginEmail, sendPasswordResetEmail } = require('../service/email');
 const { ResponseError } = require('../middleware/responseerror');
 const { AsyncHandler } = require('../middleware/async')
 
@@ -136,7 +136,7 @@ router.post('/reset-password', AsyncHandler(async (req, res) => {
     User.ConfirmationCodeDate = new Date();
     await User.save();
 
-    await SendPasswordResetEmail(User.email, User.username, ResetCode);
+    await sendPasswordResetEmail(User.email, User.username, ResetCode);
     res.status(200).json({ message: 'reset code sent to your email'});
 }));
 
