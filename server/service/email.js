@@ -1,7 +1,7 @@
 //nodemailer
 const nodemailer = require('nodemailer');
 
-const SendEmail = async (to, subject, html) => {
+const sendEmail = async (to, subject, html) => {
 	const transporter = nodemailer.createTransport({
 		service: 'gmail',
 		auth:{
@@ -19,7 +19,7 @@ const SendEmail = async (to, subject, html) => {
 
 
 const SendConfirmationEmail = async (ToEmail, username, Code) => {
-	await SendEmail(
+	await sendEmail(
 		ToEmail,
 		'Livechat Confirmation Email',
 		`
@@ -32,7 +32,7 @@ const SendConfirmationEmail = async (ToEmail, username, Code) => {
 };
 
 const SendLoginEmail = async (ToEmail, username, Code) => {
-	await SendEmail(
+	await sendEmail(
 		ToEmail,
 		'Livechat Login Code',
 		`
