@@ -5,7 +5,7 @@ const Usermodel = require('../models/user');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { VerifyToken } = require('../middleware/verifytoken');
-const { sendConfirmationEmail, SendLoginEmail, SendPasswordResetEmail } = require('../service/email');
+const { sendConfirmationEmail, sendLoginEmail, SendPasswordResetEmail } = require('../service/email');
 const { ResponseError } = require('../middleware/responseerror');
 const { AsyncHandler } = require('../middleware/async')
 
@@ -34,7 +34,7 @@ router.post('/login',AsyncHandler(async (req, res) =>{
     User.ConfirmationCodeDate = new Date();
     await User.save();
 
-    await SendLoginEmail(User.email, User.username, LoginCode);
+    await sendLoginEmail(User.email, User.username, LoginCode);
     res.status(200).json({ message: 'Code sent to your email' });
   }));
 
