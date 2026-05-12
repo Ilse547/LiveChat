@@ -5,7 +5,7 @@ const Usermodel = require('../models/user');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { VerifyToken } = require('../middleware/verifytoken');
-const { SendConfirmationEmail, SendLoginEmail, SendPasswordResetEmail } = require('../service/email');
+const { sendConfirmationEmail, SendLoginEmail, SendPasswordResetEmail } = require('../service/email');
 const { ResponseError } = require('../middleware/responseerror');
 const { AsyncHandler } = require('../middleware/async')
 
@@ -96,7 +96,7 @@ router.post('/register', AsyncHandler(async (req, res) => {
     });
     await NewUser.save();
 
-    await SendConfirmationEmail(Email, Username, ConfirmationCode);
+    await sendConfirmationEmail(Email, Username, ConfirmationCode);
 
     res.status(200).json({message : 'Worked'})
 }));
