@@ -14,7 +14,7 @@ jest.mock('mongoose', () => ({
   model: jest.fn().mockReturnValue({})
 }));
 jest.mock('../service/email', () => ({
-  SendConfirmationEmail: jest.fn().mockResolvedValue(true)
+  sendConfirmationEmail: jest.fn().mockResolvedValue(true)
 }));
 
 const app = require ('../app');
