@@ -1,4 +1,4 @@
-const { SendConfirmationEmail, SendLoginEmail } = require('../service/email');
+const { sendConfirmationEmail, sendLoginEmail } = require('../service/email');
 
 jest.mock('nodemailer', () => ({
 	createTransport: jest.fn().mockReturnValue({
@@ -9,12 +9,12 @@ jest.mock('nodemailer', () => ({
 describe('Email Service', () => {
 	it('Should do sendMail when SendLoginEmail', async ()=> {
 		await expect(
-			SendLoginEmail('www@iamcool.com', 'CoolUser', '123456')
+			sendLoginEmail('www@iamcool.com', 'CoolUser', '123456')
 		).resolves.not.toThrow();
 	});
 	it('Should do swndMail when SendConfirmationEmail', async () =>{
 		await expect(
-			SendConfirmationEmail('www@iamcool.com', 'CoolUser', '123456')
+			sendConfirmationEmail('www@iamcool.com', 'CoolUser', '123456')
 		).resolves.not.toThrow();
 	});
 });
