@@ -18,7 +18,7 @@ const sendEmail = async (to, subject, html) => {
 };
 
 
-const SendConfirmationEmail = async (ToEmail, username, Code) => {
+const sendConfirmationEmail = async (ToEmail, username, Code) => {
 	await sendEmail(
 		ToEmail,
 		'Livechat Confirmation Email',
@@ -59,4 +59,4 @@ const SendPasswordResetEmail = async (ToEmail, username, Code) => {
 		`
 	);
 };
-module.exports = { SendConfirmationEmail, SendLoginEmail, SendPasswordResetEmail };
+module.exports = { sendConfirmationEmail, SendLoginEmail, SendPasswordResetEmail };
