@@ -147,6 +147,34 @@ They can be recognized by the email adress being: ``` xyz@fakemail.com ```
 
 ---
 ## SE_08: Clean Code
+### clean code principles:
+1. Single Responsibility Principle: 
+    Files with only one responsibility  
+    Code is reusable
+2. Don't repeat yourself:
+    AsyncHandler to avoid the repitition of try and catch  
+    ResponseError to avoid the same code for errors   
+    useChat to avoid having the exact same code duplicated in Group.vue & Chat.vue  
+3. Good identifier names:
+    no magic numbers in auth.js, replaced by meaningful names  
+4. Refactoring workflow:
+    Extract routes from app.js  
+    Extract common logic from Chat.vue and Group.vue
+5. Encapsulation:
+    Group.vue and Chat.vue dont know how GunJS works  
+    Email.js hides the email transporter  
+6. Principle of least astonishment:
+    Consistent error handling and response structure  
+7. YAGNI:
+    Minimal and simple code without unsused parts
+8. Composition over inheritance:
+    Code is composed of multiple modules  
+    middleware composed inside app.js  
+    useChat is used in Chat.vue and Group.vue
+9. Pure functions:
+    ErrorHandler->deterministic  
+
+
 
 ---
 ## SE_09(Cyber security):
