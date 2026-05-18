@@ -46,12 +46,14 @@ app.use(express.json({ limit: '5kb'}));
 app.use(express.urlencoded({ extended : true }));
 app.use(sanitize);
 app.use(logger);
+const APP_URL = process.env.APP_URL || 'http://localhost:3000';
+
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-eval'"],
-      connectSrc: ["'self'", process.env.APP_URL, process.env.APP_URL.replace('https', 'wss'),],
+      connectSrc: ["'self'", APP_URL, APP_URL.replace('https', 'wss'),],
       styleSrc: ["'self'", "'unsafe-inline'"],
       imgSrc: ["'self'", "data:"],
     }
